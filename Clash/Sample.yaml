@@ -191,42 +191,42 @@ rule-providers:
     type: http
     behavior: classical
     path: ./Ruleset/iEwha/Reject.yaml
-    url: https://cdn.jsdelivr.net/gh/iEwha/Profiles@master/Ruleset/Reject.yaml
+    url: https://cdn.jsdelivr.net/gh/iEwha/Profiles@master/Provider/Ruleset/Reject.yaml
     interval: 86400
 
    Apple:
     type: http
     behavior: classical
     path: ./Ruleset/iEwha/Apple.yaml
-    url: https://cdn.jsdelivr.net/gh/iEwha/Profiles@master/Ruleset/Apple.yaml
+    url: https://cdn.jsdelivr.net/gh/iEwha/Profiles@master/Provider/Ruleset/Apple.yaml
     interval: 86400
 
    Emby:
     type: http
     behavior: classical
     path: ./Ruleset/iEwha/Emby.yaml
-    url: https://cdn.jsdelivr.net/gh/iEwha/Profiles@master/Ruleset/Emby.yaml
+    url: https://cdn.jsdelivr.net/gh/iEwha/Profiles@master/Provider/Ruleset/Emby.yaml
     interval: 86400
 
    Meta:
     type: http
     behavior: classical
     path: ./Ruleset/iEwha/Meta.yaml
-    url: https://cdn.jsdelivr.net/gh/iEwha/Profiles@master/Ruleset/Meta.yaml
+    url: https://cdn.jsdelivr.net/gh/iEwha/Profiles@master/Provider/Ruleset/Meta.yaml
     interval: 86400
 
    Microsoft:
     type: http
     behavior: classical
     path: ./Ruleset/iEwha/Microsoft.yaml
-    url: https://cdn.jsdelivr.net/gh/iEwha/Profiles@master/Ruleset/Microsoft.yaml
+    url: https://cdn.jsdelivr.net/gh/iEwha/Profiles@master/Provider/Ruleset/Microsoft.yaml
     interval: 86400
 
    Spotify:
     type: http
     behavior: classical
     path: ./Ruleset/iEwha/Spotify.yaml
-    url: https://cdn.jsdelivr.net/gh/iEwha/Profiles@master/Ruleset/Spotify.yaml
+    url: https://cdn.jsdelivr.net/gh/iEwha/Profiles@master/Provider/Ruleset/Spotify.yaml
     interval: 86400
 
 
@@ -234,49 +234,49 @@ rule-providers:
     type: http
     behavior: classical
     path: ./Ruleset/iEwha/TikTok.yaml
-    url: https://cdn.jsdelivr.net/gh/iEwha/Profiles@master/Ruleset/TikTok.yaml
+    url: https://cdn.jsdelivr.net/gh/iEwha/Profiles@master/Provider/Ruleset/TikTok.yaml
     interval: 86400
 
    Telegram:
     type: http
     behavior: classical
     path: ./Ruleset/iEwha/Telegram.yaml
-    url: https://cdn.jsdelivr.net/gh/iEwha/Profiles@master/Ruleset/Telegram.yaml
+    url: https://cdn.jsdelivr.net/gh/iEwha/Profiles@master/Provider/Ruleset/Telegram.yaml
     interval: 86400
 
    YouTube:
     type: http
     behavior: classical
     path: ./Ruleset/iEwha/YouTube.yaml
-    url: https://cdn.jsdelivr.net/gh/iEwha/Profiles@master/Ruleset/YouTube.yaml
+    url: https://cdn.jsdelivr.net/gh/iEwha/Profiles@master/Provider/Ruleset/YouTube.yaml
     interval: 86400
 
    ProxyMedia:
     type: http
     behavior: classical
     path: ./Ruleset/iEwha/ProxyMedia.yaml
-    url: https://cdn.jsdelivr.net/gh/iEwha/Profiles@master/Ruleset/ProxyMedia.yaml
+    url: https://cdn.jsdelivr.net/gh/iEwha/Profiles@master/Provider/Ruleset/ProxyMedia.yaml
     interval: 86400
 
    Proxy:
     type: http
     behavior: classical
     path: ./Ruleset/iEwha/Proxy.yaml
-    url: https://cdn.jsdelivr.net/gh/iEwha/Profiles@master/Ruleset/Proxy.yaml
+    url: https://cdn.jsdelivr.net/gh/iEwha/Profiles@master/Provider/Ruleset/Proxy.yaml
     interval: 86400
 
    China:
     type: http
     behavior: classical
     path: ./Ruleset/iEwha/Direct.yaml
-    url: https://cdn.jsdelivr.net/gh/iEwha/Profiles@master/Ruleset/China.yaml
+    url: https://cdn.jsdelivr.net/gh/iEwha/Profiles@master/Provider/Ruleset/China.yaml
     interval: 86400
 
    cncidr:
     type: http
     behavior: classical
     path: ./Ruleset/iEwha/cncidr.yaml
-    url: https://cdn.jsdelivr.net/gh/iEwha/Profiles@master/Ruleset/cncidr.yaml
+    url: https://cdn.jsdelivr.net/gh/iEwha/Profiles@master/Provider/Ruleset/cncidr.yaml
     interval: 86400
 
 # 规则模式

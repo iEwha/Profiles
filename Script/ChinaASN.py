@@ -7,11 +7,11 @@ from lxml import etree
 import time
 
 def initFile():
-    with open("Ruleset/ASN.China.list", "w") as asnFile:
+    with open("Provider/Ruleset/ASN.China.list", "w") as asnFile:
         asnFile.write("// ASN Information in China \n")
 
 def initFile2():
-    with open("Ruleset/ASN.China.yaml", "w") as asnFile:
+    with open("Provider/Ruleset/ASN.China.yaml", "w") as asnFile:
         asnFile.write("payload: \n")
 
 
@@ -29,7 +29,7 @@ def saveLatestASN():
         asnName = asn.xpath('td[2]')[0].text
         if asnName != None:
             asnInfo = "IP-ASN,{} // {}".format(asnNumber, asnName)
-            with open("Ruleset/ASN.China.list", "a") as asnFile:
+            with open("Provider/Ruleset/ASN.China.list", "a") as asnFile:
                 asnFile.write(asnInfo)
                 asnFile.write("\n")
     initFile2()
@@ -38,7 +38,7 @@ def saveLatestASN():
         asnName = asn.xpath('td[2]')[0].text
         if asnName != None:
             asnInfo = "  - IP-ASN,{}".format(asnNumber)
-            with open("Ruleset/ASN.China.yaml", "a") as asnFile:
+            with open("Provider/Ruleset/ASN.China.yaml", "a") as asnFile:
                 asnFile.write(asnInfo)
                 asnFile.write("\n")
 saveLatestASN()
