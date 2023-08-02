@@ -23,6 +23,13 @@ jobs:
         run: |
           python Script/ChinaASN.py
           python Script/ChinaIP.py
-      - uses: stefanzweifel/git-auto-commit-action@v4
+      - name: commit
+        run: | 
+         git config --local user.name "iEwha"
+         git config --local user.email "81971510+iEwha@users.noreply.github.com"
+         git add .
+         git commit -m "Updated at $(TZ=UTC-8 date +'%Y-%m-%d %H:%M:%S')" -a
+      - name: Push changes
+        uses: ad-m/github-push-action@master
         with:
-          commit_message: Update 
+          github_token: ${{ secrets.GIT_TOKEN }}
