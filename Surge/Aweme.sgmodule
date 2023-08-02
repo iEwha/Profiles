@@ -1,0 +1,10 @@
+#!name=抖音短视频
+#!desc=去广告和水印 | 抖音版本 <= 16.2.0
+#!system=ios
+
+[Script]
+抖音短视频 = type=http-request,pattern=^https?:\/\/api.*\.amemv\.com\/aweme\/v\d\/,script-path=https://raw.githubusercontent.com/iEwha/Profiles/master/Script/Aweme.js
+抖音短视频 = type=http-response,pattern=^https?:\/\/api.*\.amemv\.com\/aweme\/v1\/.+#scripting$,requires-body=1,script-path=https://raw.githubusercontent.com/iEwha/Profiles/master/Script/Aweme.js
+
+[MITM]
+hostname = %APPEND% *.snssdk.com, *.amemv.com, 

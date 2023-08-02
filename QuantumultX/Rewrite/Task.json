@@ -1,0 +1,15 @@
+{
+    "name": "iEwha Task gallery", 
+    "description": "https://github.com/iEwha", 
+    "task": [
+        {
+            "config": "30 */12 * * * https://raw.githubusercontent.com/Peng-YM/Sub-Store/master/backend/dist/cron-sync-artifacts.min.js, tag=Sub-Store订阅同步, img-url=https://raw.githubusercontent.com/iEwha/Profiles/master/icon/Sub-Store.png, enabled=true"
+        }, 
+       {
+            "config": "35 6 * * * https://raw.githubusercontent.com/ClydeTime/Quantumult/main/Script/Task/BiliBili.js, tag=哔哩哔哩, img-url=https://raw.githubusercontent.com/iEwha/Profiles/master/icon/Bilibili.png, enabled=true"
+        }, 
+       {
+            "config": "0 10 0 * * * https://raw.githubusercontent.com/lowking/Scripts/master/ali/aliYunPanCheckIn.js, tag=阿里云盘, img-url=https://raw.githubusercontent.com/iEwha/Profiles/master/icon/ALiYunPan.png, enabled=true"
+        }, 
+    ]
+}

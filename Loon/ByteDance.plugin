@@ -1,0 +1,13 @@
+#!name=抖音短视频
+#!desc=去广告和水印 | 抖音版本 <= 16.2.0
+#!system=ios
+#!icon= https://raw.githubusercontent.com/iEwha/Profiles/master/icon/ByteDance.png
+
+[Rewrite]
+^https?:\/\/api.*\.amemv\.com\/aweme\/v2\/feed\/ header https://aweme.snssdk.com/aweme/v1/feed/
+
+[Script]
+http-response ^https?:\/\/aweme\.snssdk\.com\/aweme\/v\d\/feed\/ script-path=https://raw.githubusercontent.com/iEwha/Profiles/master/Script/ByteDance.js, requires-body=true, timeout=10, tag=抖音短视频
+
+[MITM]
+hostname = *.snssdk.com,*.amemv.com

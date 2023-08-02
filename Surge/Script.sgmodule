@@ -1,0 +1,51 @@
+#!name=Scripts
+#!desc= 屏蔽HTTP3/QUIC协议、Bilbii换区,评分、微信公众号广告
+#!system=ios
+
+[General]
+force-http-engine-hosts = %APPEND% boxjs.net, boxjs.com
+
+[Rule]
+# > 手机百度
+DOMAIN-SUFFIX,ug.baidu.com,REJECT
+URL-REGEX,^https?:\/\/mbd\.baidu\.com\/tcbox,REJECT
+# > Safari 防跳转
+DOMAIN,app-site-association.cdn-apple.com,REJECT
+# > Block iOS Update
+DOMAIN,gdmf.apple.com,REJECT
+DOMAIN,mesu.apple.com,REJECT
+# > 屏蔽HTTP3/QUIC协议 
+AND,((PROTOCOL,UDP),(DEST-PORT,443)),REJECT-NO-DROP
+# > 屏蔽YouTube的UDP
+AND,((PROTOCOL,UDP),(DOMAIN-SUFFIX,googlevideo.com)),REJECT-NO-DROP
+
+[URL Rewrite]
+# > Youtube中文字幕
+https:\/\/www.youtube.com\/api\/timedtext\?.+&lang=(?!(zh|zh\-Hans)&)((?!&tlang=zh\-Hans).)*$ $0&tlang=zh-Hans header
+# > Redirect Google Search Service
+^https?:\/\/(www.)?(g|google)\.cn https://www.google.com 302
+# > Redirect Google Maps Service
+^https?:\/\/(ditu|maps).google\.cn https://maps.google.com 302
+# > IGN China to IGN Global
+^https?:\/\/(www.)?ign\.xn--fiqs8s\/ http://cn.ign.com/ccpref/us 302
+
+[Script]
+# > bilbii换区,评分
+换区 = type=http-response,pattern=^https:\/\/ap(p|i)\.bili(bili|api)\.(com|net)\/(pgc\/view\/v\d\/app\/season|x\/offline\/version)\?,requires-body=1,max-size=0,script-path=https://raw.githubusercontent.com/NobyDa/Script/master/Surge/JS/Bili_Auto_Regions.js
+搜索 = type=http-request,pattern=^https:\/\/ap(p|i)\.bili(bili|api)\.(com|net)\/x\/v\d\/search(\/type)?\?.+?%20(%E6%B8%AF|%E5%8F%B0|%E4%B8%AD)&,script-path=https://raw.githubusercontent.com/NobyDa/Script/master/Surge/JS/Bili_Auto_Regions.js
+首页 = type=http-response, pattern=^https?:\/\/app\.bili(bili\.com|api\.net)\/x\/resource\/show\/tab\/v2\?, requires-body=1, script-path=https://raw.githubusercontent.com/BiliUniverse/Enhanced/main/js/BiliBili.Enhanced.response.js
+分区 = type=http-response, pattern=^https?:\/\/app\.bili(bili\.com|api\.net)\/x\/v2\/channel\/region\/list\?, requires-body=1, script-path=https://raw.githubusercontent.com/BiliUniverse/Enhanced/main/js/BiliBili.Enhanced.response.js
+我的 = type=http-response, pattern=^https?:\/\/app\.bili(bili\.com|api\.net)\/x\/v2\/account\/mine(\/ipad)?\?, requires-body=1, script-path=https://raw.githubusercontent.com/BiliUniverse/Enhanced/main/js/BiliBili.Enhanced.response.js,
+
+# > Boxjs 
+boxjs = type=http-request,pattern=https?:\/\/boxjs\.(com|net),script-path=https://raw.githubusercontent.com/chavyleung/scripts/master/box/chavy.boxjs.js, requires-body=true, timeout=120
+
+# > Sub-Store
+Sub-Store Core=type=http-request,pattern=^https?:\/\/sub\.store\/((download)|api\/(preview|sync|(utils\/node-info))),script-path=https://github.com/sub-store-org/Sub-Store/releases/latest/download/sub-store-1.min.js,requires-body=true,timeout=120,ability=http-client-policy
+Sub-Store Simple=type=http-request,pattern=^https?:\/\/sub\.store,script-path=https://github.com/sub-store-org/Sub-Store/releases/latest/download/sub-store-0.min.js,requires-body=true
+
+# > 微信
+微信公众号 = type=http-response,pattern=^https?:\/\/mp\.weixin\.qq\.com\/mp\/getappmsgad,requires-body=1,max-size=0,script-path=https://raw.githubusercontent.com/iEwha/Profiles/master/Script/WeChat.js,script-update-interval=0
+
+[MITM]
+hostname = %APPEND% www.youtube.com, mbd.baidu.com, s.bdstatic.com, ap?.bilibili.com, ap?.biliapi.net, www.google.cn, boxjs.net, boxjs.com,sub.store,mp.weixin.qq.com,

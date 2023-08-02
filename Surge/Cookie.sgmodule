@@ -1,0 +1,14 @@
+#!name=Cookie
+#!desc=阿里云盘、哔哩哔哩
+#!system=ios
+
+[Script]
+# > 阿里云盘 
+阿里云盘 = requires-body=1,type=http-response,pattern=https:\/\/auth.aliyundrive.com\/v2\/account\/token,script-path=https://raw.githubusercontent.com/lowking/Scripts/master/ali/aliYunPanCheckIn.js
+
+# > 哔哩哔哩或网页 https://www.bilibili.com/
+哔哩哔哩 = type=http-request,pattern=^https:\/\/app\.bilibili\.com\/x\/resource\/domain\?,script-path=https://raw.githubusercontent.com/ClydeTime/Quantumult/main/Script/Task/BiliBili.js
+哔哩哔哩 = type=http-request,pattern=^https:\/\/m.bilibili.com/$,script-path=https://raw.githubusercontent.com/ClydeTime/Quantumult/main/Script/Task/BiliBili.js
+
+[MITM]
+hostname = %APPEND% auth.aliyundrive.com, app.bilibili.com, m.bilibili.com 
