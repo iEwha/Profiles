@@ -1,4 +1,4 @@
-name: Update ASN 
+name: Update ASN&IP
 
 on: 
   workflow_dispatch:

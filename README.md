@@ -107,5 +107,6 @@
 * [app2smile](https://github.com/app2smile/rules)
 * [VirgilClyne](https://github.com/VirgilClyne/iRingo)
 * [mieqq](https://github.com/mieqq/mieqq)
+* [xOS](https://github.com/xOS/Config.git)
 
 
