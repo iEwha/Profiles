@@ -41,7 +41,7 @@ jobs:
         run: |
           awk 'FNR==1{print ""}{print}' Provider/AdRules/*.list > Provider/AdRules/Merge.txt
           awk '!seen[$0]++' Provider/AdRules/Merge.txt > Provider/AdRules/Merge.list
-          grep -v -f Provider/AdRules/Bypass.list Provider/AdRules/Merge.list | sed '/^$/d' > Provider/AdRule.list
+          grep -v -f Provider/AdRules/Bypass.list Provider/AdRules/Merge.list | sed '/^$/d' > Provider/Ruleset/AdRule.list
           rm -rf Provider/AdRules/Merge.txt
           rm -rf Provider/AdRules/Merge.list
           
