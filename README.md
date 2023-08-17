@@ -20,9 +20,6 @@
 <details> 
 <summary>Surge模块</summary>
 
-* BiliBili 净化和换区
-   ``` bash
-   https://raw.githubusercontent.com/iEwha/Profiles/master/Surge/Bilibili.sgmodule
 * 抖音净化
    ``` bash
    https://raw.githubusercontent.com/iEwha/Profiles/master/Surge/Aweme.sgmodule
@@ -43,9 +40,6 @@
 <details> 
 <summary>QuantumultX复写</summary>
 
-* BiliBili 净化和换区
-   ``` bash
-  https://raw.githubusercontent.com/iEwha/Profiles/master/QuantumultX/Rewrite/bilibili.conf
 * 抖音净化
    ``` bash
    https://raw.githubusercontent.com/iEwha/Profiles/master/QuantumultX/Rewrite/Aweme.conf 
