@@ -1,6 +1,3 @@
-[![iEwha's GitHub stats](https://github-readme-stats.vercel.app/api?username=iEwha&show_icons=true&count_private=true&icon_color=008080&text_color=00AEFF&bg_color=27282200
-)](https://github.com/iEwha/Profiles)
-
 ## 说明:
 - QuantumultX、Surge，搬运的图标&脚本.
 - 所有规则和脚本均来自其他作者库.
@@ -32,9 +29,6 @@
 * TikTok解锁
    ``` bash
    https://raw.githubusercontent.com/iEwha/Profiles/master/Surge/TikTok.sgmodule
-* YouTube去广告
-   ``` bash
-  https://raw.githubusercontent.com/iEwha/Profiles/master/Surge/YouTubeAds.sgmodule
 * 全能搜索
    ``` bash
    https://raw.githubusercontent.com/iEwha/Profiles/master/Surge/Q_Search.sgmodule
@@ -58,9 +52,6 @@
 * TikTok解锁 
    ``` bash
    https://raw.githubusercontent.com/iEwha/Profiles/master/QuantumultX/Rewrite/TikTok-JP.conf
-* YouTube去广告 
-   ``` bash
-   https://raw.githubusercontent.com/iEwha/Profiles/master/QuantumultX/Rewrite/YouTubeAds.conf
 * 全能搜索 
    ``` bash
    https://raw.githubusercontent.com/iEwha/Profiles/master/QuantumultX/Rewrite/Q_Search.conf
@@ -81,9 +72,6 @@
 * TikTok解锁 
    ``` bash
    https://raw.githubusercontent.com/iEwha/Profiles/master/Loon/TikTok.plugin
-* YouTube去广告 
-   ``` bash
-   https://raw.githubusercontent.com/iEwha/Profiles/master/Loon/YouTubeAds.plugin
 * 功能解锁 
    ``` bash
    https://raw.githubusercontent.com/iEwha/Profiles/master/Loon/Unlock.plugin 
@@ -107,6 +95,6 @@
 * [app2smile](https://github.com/app2smile/rules)
 * [VirgilClyne](https://github.com/VirgilClyne/iRingo)
 * [mieqq](https://github.com/mieqq/mieqq)
-* [xOS](https://github.com/xOS/Config.git)
+
 
 
