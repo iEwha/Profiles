@@ -10,7 +10,7 @@ PS Express= type=http-response,pattern=^https:\/\/.*\.adobe\..*\/mobile_profile\
 # > Emby解锁
 Emby= type=http-response,pattern=^https?:\/\/mb3admin.com\/admin\/service\/registration\/validateDevice, requires-body=1,script-path= https://raw.githubusercontent.com/iEwha/Profiles/master/Surge/Scripts/EmbyPremiere.js
 # > Adguardpremium
-Adguard= type=http-response,pattern=^https:\/\/mobile-api\.adguard\.com\/api\/1\.0\/ios_validate_receipt$, requires-body=1,max-size=-1,script-path=https://raw.githubusercontent.com/iEwha/Profiles/master/Script/adguard.js
+AdGuard=type=http-response,pattern=^https?:\/\/mobile-api\.adguard\.org\/api\/.+\/ios_validate_receipt,requires-body=1,script-path=https://raw.githubusercontent.com/iEwha/Profiles/master/Script/adguard.js
 # > 西窗烛 登录使用解锁终身会员 
 西窗烛= type=http-response,pattern=https://lchttpapi.xczim.com/*, requires-body=1,max-size=-1,script-path=https://raw.githubusercontent.com/iEwha/Profiles/master/Script/xcz.js
 # > 小影 解锁高级功能
@@ -26,5 +26,5 @@ spotify-proto = type=http-response,pattern=^https:\/\/spclient\.wg\.spotify\.com
 美图秀秀 = type=http-response,pattern=^https?://(api|h5).xiuxiu.meitu.com/(v1/user/show.json|v1/vip/vip_show.json|v1/vip/prompt/query.json|v1/h5/vip/sub_detail.json|v1/h5/user/self_show.json|v1/h5/vip/user_detail.json|v1/vip/prompt/query.json|v1/vip/prompt/query.json), requires-body=1,max-size=0,script-path=https://raw.githubusercontent.com/iEwha/Profiles/master/Script/mtxx.js
 
 [MITM]
-hostname = %APPEND%  api.revenuecat.com, lcs-mobile-cops.adobe.io, mb3admin.com, mobile-api.adguard.com, lchttpapi.xczim.com,api-chn.rthdo.com,m*.bybutter.com, spclient.wg.spotify.com,baimiao.uzero.cn,api.xiuxiu.meitu.com, h5.xiuxiu.meitu.com，
+hostname = %APPEND%  api.revenuecat.com, lcs-mobile-cops.adobe.io, mb3admin.com, mobile-api.adguard.org, lchttpapi.xczim.com,api-chn.rthdo.com,m*.bybutter.com, spclient.wg.spotify.com,baimiao.uzero.cn,api.xiuxiu.meitu.com, h5.xiuxiu.meitu.com，
 
