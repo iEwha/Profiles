@@ -19,10 +19,6 @@ AND,((PROTOCOL,UDP),(DEST-PORT,443)),REJECT-NO-DROP
 # > 屏蔽YouTube的UDP
 AND,((PROTOCOL,UDP),(DOMAIN-SUFFIX,googlevideo.com)),REJECT-NO-DROP
 
-[Map Local]
-# > 百度首页纯净搜索 
-^https?:\/\/(www|m)\.baidu\.com\/?($|\?(from=\w{8,9}|tn=&from=)) data="https://raw.githubusercontent.com/Keywos/rule/main/mocks/baidu.html" header="Content-Type: text/html; charset=utf-8"
-
 [URL Rewrite]
 # > Youtube中文字幕
 https:\/\/www.youtube.com\/api\/timedtext\?.+&lang=(?!(zh|zh\-Hans)&)((?!&tlang=zh\-Hans).)*$ $0&tlang=zh-Hans header
@@ -52,4 +48,4 @@ Sub-Store Simple=type=http-request,pattern=^https?:\/\/sub\.store,script-path=ht
 微信公众号 = type=http-response,pattern=^https?:\/\/mp\.weixin\.qq\.com\/mp\/getappmsgad,requires-body=1,max-size=0,script-path=https://raw.githubusercontent.com/iEwha/Profiles/master/Script/WeChat.js,script-update-interval=0
 
 [MITM]
-hostname = %APPEND% www.youtube.com, m.baidu.com,www.baidu.com,mbd.baidu.com, s.bdstatic.com, ap?.bilibili.com, ap?.biliapi.net, www.google.cn, boxjs.net, boxjs.com,sub.store,mp.weixin.qq.com,
+hostname = %APPEND% www.youtube.com, m.baidu.com,www.baidu.com,mbd.baidu.com, ap?.bilibili.com, ap?.biliapi.net, www.google.cn, boxjs.net, boxjs.com,sub.store,mp.weixin.qq.com,
