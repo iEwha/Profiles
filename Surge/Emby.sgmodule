@@ -1,5 +1,5 @@
 #!name=Emby 外链播放
-#!desc=Emby 终点站,Odyssey+,卷毛鼠,Misty
+#!desc=终点站,Odyssey+,卷毛鼠
 #!desc=本模块和脚本由终点站 VIP 群 @renzhipengBot 原创，@AppleArcade 魔改。转载或魔改请注明出处！)
 
 [Script]
@@ -8,4 +8,4 @@
 资源路径伪静态 = type=http-request,pattern=(\/[Vv]ideos\/\d+\/stream\/.+\?.+&filename)|(\/[Vv]ideos\/\d+\/\w{32}\/[Ss]ubtitles\/\d+\/.+\?.+&filename),script-path=https://raw.githubusercontent.com/rartv/EmbyPublic/test/surge/emby-plugin.js,debug=false
 
 [MITM]
-hostname = %APPEND% *.emby.wtf:0, *.odysseyplus.site:0, *.jmsooo.com:0, misty.ltd:0
+hostname = %APPEND% *.emby.wtf:0, *.odysseyplus.site:0, *.jmsooo.com:0,
