@@ -376,8 +376,7 @@ DOMAIN-SUFFIX,reuters.com
 DOMAIN-SUFFIX,reutersmedia.net
 # > Steam
 DOMAIN-SUFFIX,steamcommunity.com
-# DOMAIN,store.steampowered.com
-# ---(Telegram)---
+# > Telegram
 DOMAIN-SUFFIX,cdn-telegram.org
 DOMAIN-SUFFIX,comments.app
 DOMAIN-SUFFIX,graph.org
@@ -393,31 +392,21 @@ DOMAIN-SUFFIX,telegram.space
 DOMAIN-SUFFIX,telegram-cdn.org
 DOMAIN-SUFFIX,telesco.pe
 DOMAIN-SUFFIX,tg.dev
-# > Americas
-IP-ASN,59930,no-resolve
-IP-CIDR6,2a0a:f280::/32,no-resolve
-# IP-CIDR,91.108.12.0/22,no-resolve
-# > Finland
-IP-ASN,211157,no-resolve
-# IP-CIDR,91.105.192.0/23,no-resolve
-# IP-CIDR,185.76.151.0/24,no-resolve
-# > Europe
-IP-ASN,62041,no-resolve
+IP-CIDR,91.108.56.0/22,no-resolve
+IP-CIDR,91.108.4.0/22,no-resolve
+IP-CIDR,91.108.8.0/22,no-resolve
+IP-CIDR,91.108.16.0/22,no-resolve
+IP-CIDR,91.108.12.0/22,no-resolve
 IP-CIDR,149.154.160.0/20,no-resolve
+IP-CIDR,91.105.192.0/23,no-resolve
+IP-CIDR,91.108.20.0/22,no-resolve
+IP-CIDR,185.76.151.0/24,no-resolve
+IP-CIDR6,2001:b28:f23d::/48,no-resolve
+IP-CIDR6,2001:b28:f23f::/48,no-resolve
 IP-CIDR6,2001:67c:4e8::/48,no-resolve
-# IP-CIDR,91.108.4.0/22,no-resolve
-# IP-CIDR,91.108.8.0/22,no-resolve
-# IP-CIDR6,2001:b28:f23d::/48,no-resolve
-# > Singapore
-IP-ASN,62014,no-resolve
-# IP-CIDR,91.108.16.0/22,no-resolve
-# IP-CIDR,91.108.56.0/22,no-resolve
-# IP-CIDR6,2001:b28:f23f::/48,no-resolve
-# > India
-IP-ASN,44907,no-resolve
-# IP-CIDR,91.108.20.0/22,no-resolve
-# IP-CIDR6,2001:b28:f23c::/48,no-resolve
-# ------
+IP-CIDR6,2001:b28:f23c::/48,no-resolve
+IP-CIDR6,2a0a:f280::/32,no-resolve
+
 # > The Economist
 DOMAIN-SUFFIX,economist.com
 DOMAIN-SUFFIX,static-economist.com
@@ -487,7 +476,7 @@ DOMAIN,wego.here.com
 # > Alphabet
 DOMAIN-SUFFIX,go.dev
 DOMAIN-SUFFIX,golang.org
-# ---(Apple)---
+# > Apple
 DOMAIN-SUFFIX,appsto.re // Apple URL Shortener
 DOMAIN-SUFFIX,smoot.apple.com // Spotlight
 DOMAIN,amp-api.podcasts.apple.com // Podcasts
@@ -496,6 +485,7 @@ DOMAIN,books.itunes.apple.com // iBooks Store download
 DOMAIN,facetime.apple.com // FaceTime Links
 DOMAIN,lookup-api.apple.com // Look Up
 DOMAIN,radio.itunes.apple.com // Apple Music Radio
+
 # > Web Preview
 DOMAIN,apps.apple.com
 DOMAIN,books.apple.com
