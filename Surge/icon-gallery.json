@@ -52,11 +52,23 @@
     {
       "name":"Google",
       "url":"https://raw.githubusercontent.com/iEwha/Profiles/master/icon/Google.png"
-    },            
+    }, 
+    {
+      "name":"Quantumult_X",
+      "url":"https://raw.githubusercontent.com/iEwha/Profiles/master/icon/Quantumult_X.png"
+    },           
     {
       "name":"Spotify",
       "url":"https://raw.githubusercontent.com/iEwha/Profiles/master/icon/Spotify.png"
-     },        
+     },
+    {
+      "name":"Surge",
+      "url":"https://raw.githubusercontent.com/iEwha/Profiles/master/icon/Surge.png"
+     },      
+    {
+      "name":"Surge_1",
+      "url":"https://raw.githubusercontent.com/iEwha/Profiles/master/icon/Surge_1.png"
+     },          
     {
        "name":"ByteDance",
        "url":"https://raw.githubusercontent.com/iEwha/Profiles/master/icon/ByteDance.png"
