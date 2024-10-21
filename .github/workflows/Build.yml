@@ -3,7 +3,7 @@ name: Update ASN&IP
 on: 
   workflow_dispatch:
   schedule:
-    - cron: "0 0 * * Mon,Fri"
+    - cron: "0 0 1,15 * *"
 
 jobs:
   build: 
