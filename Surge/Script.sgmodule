@@ -33,9 +33,6 @@ https:\/\/www.youtube.com\/api\/timedtext\?.+&lang=(?!(zh|zh\-Hans)&)((?!&tlang=
 # > bilbii换区,评分
 换区 = type=http-response,pattern=^https:\/\/ap(p|i)\.bili(bili|api)\.(com|net)\/(pgc\/view\/v\d\/app\/season|x\/offline\/version)\?,requires-body=1,max-size=0,script-path=https://raw.githubusercontent.com/NobyDa/Script/master/Surge/JS/Bili_Auto_Regions.js
 搜索 = type=http-request,pattern=^https:\/\/ap(p|i)\.bili(bili|api)\.(com|net)\/x\/v\d\/search(\/type)?\?.+?%20(%E6%B8%AF|%E5%8F%B0|%E4%B8%AD)&,script-path=https://raw.githubusercontent.com/NobyDa/Script/master/Surge/JS/Bili_Auto_Regions.js
-首页 = type=http-response, pattern=^https?:\/\/app\.bili(bili\.com|api\.net)\/x\/resource\/show\/tab\/v2\?, requires-body=1, script-path=https://raw.githubusercontent.com/BiliUniverse/Enhanced/main/js/BiliBili.Enhanced.response.js
-分区 = type=http-response, pattern=^https?:\/\/app\.bili(bili\.com|api\.net)\/x\/v2\/channel\/region\/list\?, requires-body=1, script-path=https://raw.githubusercontent.com/BiliUniverse/Enhanced/main/js/BiliBili.Enhanced.response.js
-我的 = type=http-response, pattern=^https?:\/\/app\.bili(bili\.com|api\.net)\/x\/v2\/account\/mine(\/ipad)?\?, requires-body=1, script-path=https://raw.githubusercontent.com/BiliUniverse/Enhanced/main/js/BiliBili.Enhanced.response.js,
 
 # > Boxjs 
 boxjs = type=http-request,pattern=https?:\/\/boxjs\.(com|net),script-path=https://raw.githubusercontent.com/chavyleung/scripts/master/box/chavy.boxjs.js, requires-body=true, timeout=120
