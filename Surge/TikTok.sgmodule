@@ -1,16 +1,20 @@
 #!name=TikTok
-#!desc=解锁日区&去水印（v21.1.0支持向下兼容）
-#!system=ios
+#!desc=TikTok解锁区域,下载去水印,自定义参数 
+#!arguments=REGION_CODE:JP,WATERMARK_REMOVAL:下载去水印
+#!arguments-desc=[参数设置]\nRULE_SET_ENABLED: 是否启用TikTok 分流规则集(添加注释符号'#'为禁用,默认启用);\nPROXY_NAME: 自定义分流规则对应的策略名称,默认PROXY;\nREGION_CODE: TikTok重定向区域解锁国家简称,JP=日本,US=美国,SG=新加坡,KR=韩国,默认日本;\nWATERMARK_REMOVAL: 是否启用TikTok下载去水印脚本(添加注释符号'#'为禁用,默认启用);
 
 [URL Rewrite]
-#解锁
-(?<=_region=)CN(?=&) JP 307
+# > 区域解锁
+(?<=_region=)CN(?=&) {{{REGION_CODE}}} 307
 (^h.+v5\/)(.+) $1 302
 (?<=&mcc_mnc=)4 2 307
-#去水印
+# > 去水印
 (?<=eme\/v)2(?=\/f\w{2}d\/\?.*) 1 302
 
 [Script]
-TikTok去水印 = type=http-response,pattern=https?:\/\/.*\.tiktokv\.com\/aweme\/v\d\/(feed|mix\/aweme|aweme\/post|(multi\/)?aweme\/detail|follow\/feed|nearby\/feed|search\/item|general\/search\/single|hot\/search\/video\/list|aweme\/favorite),requires-body=1,max-size=0,script-path=https://raw.githubusercontent.com/iEwha/Profiles/master/Script/TikTok.js,script-update-interval=0
+# > TikTok 去水印
+{{{WATERMARK_REMOVAL}}} = type=http-response,pattern=https?:\/\/.*\.tiktokv\.com\/aweme\/v\d\/(feed|mix\/aweme|aweme\/post|(multi\/)?aweme\/detail|follow\/feed|nearby\/feed|search\/item|general\/search\/single|hot\/search\/video\/list|aweme\/favorite),max-size=0,script-update-interval=0,script-path=https://raw.githubusercontent.com/iEwha/Profiles/master/Script/TikTok.js,requires-body=true,timeout=30,max-size=0
+
 [MITM]
-hostname = %APPEND% *.tiktokv.com, *.byteoversea.com, *.tik-tokapi.com
+hostname = %APPEND% *.tiktokv.com,*.byteoversea.com,*.tik-tokapi.com
+
