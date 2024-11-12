@@ -27,14 +27,17 @@ def saveLatestASN():
     for asn in asns:
         asnNumber = asn.xpath('td[1]/a')[0].text.replace('AS','')
         asnName = asn.xpath('td[2]')[0].text
-        if asnInfo = "IP-ASN,{}".format(asnNumber)
+        if asnName != None:
+            asnInfo = "IP-ASN,{}".format(asnNumber)
             with open("Provider/Ruleset/ASN.China.list", "a") as asnFile:
                 asnFile.write(asnInfo)
                 asnFile.write("\n")
     initFile2()
     for asn in asns:
         asnNumber = asn.xpath('td[1]/a')[0].text.replace('AS','')
-        if asnInfo = "  - IP-ASN,{}".format(asnNumber)
+        asnName = asn.xpath('td[2]')[0].text
+        if asnName != None:
+            asnInfo = "  - IP-ASN,{}".format(asnNumber)
             with open("Provider/Ruleset/ASN.China.yaml", "a") as asnFile:
                 asnFile.write(asnInfo)
                 asnFile.write("\n")
