@@ -617,6 +617,7 @@ payload:
   - DOMAIN-SUFFIX,zalmos.com
   - DOMAIN-SUFFIX,zaobao.com.sg
   - DOMAIN-SUFFIX,zeutch.com
+  - DOMAIN-SUFFIX,z-library.sk
   - DOMAIN-SUFFIX,zynamics.com
 
   # > Force some domains which are fucked by GFW while resolving DNS,or do not respect the system Proxy
