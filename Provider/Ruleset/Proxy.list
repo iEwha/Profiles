@@ -211,7 +211,6 @@ DOMAIN-SUFFIX,zaobao.com
 DOMAIN-SUFFIX,zello.com
 DOMAIN-SUFFIX,zeronet.io
 DOMAIN-SUFFIX,z-lib.org
-DOMAIN-SUFFIX,z-library.sk
 DOMAIN-SUFFIX,zophar.net
 DOMAIN-SUFFIX,zyxel.com
 
@@ -464,6 +463,7 @@ DOMAIN-SUFFIX,singlelogin.re
 DOMAIN-SUFFIX,singlelogin.rs
 DOMAIN-SUFFIX,z-lib.gs
 DOMAIN-SUFFIX,z-library.rs
+DOMAIN-SUFFIX,z-library.sk
 
 # (Region-Restricted Access Denied)
 DOMAIN-SUFFIX,engadget.com

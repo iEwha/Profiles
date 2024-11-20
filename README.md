@@ -78,7 +78,7 @@
 
 - 致谢以下作者库，排名不分先后
 * [NobyDa](https://github.com/NobyDa/Script/tree/master) 
-* [DivineEngine](https://github.com/DivineEngine/Profiles/tree/master) 
+* [ConnersHua](https://github.com/ConnersHua/RuleGo/tree/master) 
 * [KOP-XIAO](https://github.com/KOP-XIAO/QuantumultX)
 * [Choler](https://github.com/Choler/Surge)
 * [chavyleung](https://github.com/chavyleung)

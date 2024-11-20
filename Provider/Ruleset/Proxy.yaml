@@ -617,7 +617,6 @@ payload:
   - DOMAIN-SUFFIX,zalmos.com
   - DOMAIN-SUFFIX,zaobao.com.sg
   - DOMAIN-SUFFIX,zeutch.com
-  - DOMAIN-SUFFIX,z-library.sk
   - DOMAIN-SUFFIX,zynamics.com
 
   # > Force some domains which are fucked by GFW while resolving DNS,or do not respect the system Proxy
@@ -691,6 +690,16 @@ payload:
   # > exception
   - DOMAIN-SUFFIX,wheel-size.cn
   - DOMAIN-SUFFIX,chalungu.cn
+
+  # > Z-Library
+  - DOMAIN-SUFFIX,articles.sk
+  - DOMAIN-SUFFIX,go-to-library.sk
+  - DOMAIN-SUFFIX,singlelogin.re
+  - DOMAIN-SUFFIX,singlelogin.rs
+  - DOMAIN-SUFFIX,z-lib.gs
+  - DOMAIN-SUFFIX,z-library.rs
+  - DOMAIN-SUFFIX,z-library.sk
+  - DOMAIN-SUFFIX,z-library.sk
 
   # > Amazon
   - IP-CIDR,13.32.0.0/16,no-resolve
