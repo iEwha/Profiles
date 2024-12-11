@@ -1,74 +1,87 @@
-var watermark = body => {
+const watermark = (body) => {
     try {
-        body.replace(/\"room_id\":(\d{2,})/g, '"room_id":"$1"');
+        // 替换 room_id 格式
+        body = body.replace(/\"room_id\":(\d{2,})/g, '"room_id":"$1"');
         let obj = JSON.parse(body);
-        if (obj.data) obj.data = Follow(obj.data);
-        if (obj.aweme_list) obj.aweme_list = Feed(obj.aweme_list);
-        if (obj.aweme_detail) obj.aweme_detail = Share(obj.aweme_detail);
-        if (obj.aweme_details) obj.aweme_details = Feed(obj.aweme_details);
+
+        if (obj.data) obj.data = processFollowData(obj.data);
+        if (obj.aweme_list) obj.aweme_list = processFeedData(obj.aweme_list);
+        if (obj.aweme_detail) obj.aweme_detail = processShareData(obj.aweme_detail);
+        if (obj.aweme_details) obj.aweme_details = processFeedData(obj.aweme_details);
+
         $done({ body: JSON.stringify(obj) });
-} catch (err) {
-        console.log("aaaaa!!!!\n" + err);
+    } catch (err) {
+        console.error("Error occurred:\n", err);
         $done({});
     }
-}
-watermark($response.body);
+};
 
-function Follow(data) {
-    if (data && data.length > 0) {
-        for (let i in data) {
-            if (data[i].aweme.video) video_lists(data[i].aweme);
+function processFollowData(data) {
+    if (!Array.isArray(data)) return data;
+
+    data.forEach((item) => {
+        if (item.aweme?.video) {
+            processVideoData(item.aweme);
         }
-    }
+    });
+
     return data;
 }
-// 电报群：https://t.me/baipiao_666
 
-function Feed(aweme_list) {
-    if (aweme_list && aweme_list.length > 0) {
-        for (let i in aweme_list) {
-            if (aweme_list[i].is_ads == true) {
-                aweme_list.splice(i, 1);
-            } else if (aweme_list[i].video) {
-                video_lists(aweme_list[i]);
-            } else {
-                if (!enabled_live) aweme_list.splice(i, 1);
-            }
+function processFeedData(awemeList) {
+    if (!Array.isArray(awemeList)) return awemeList;
+
+    return awemeList.filter((item) => {
+        if (item.is_ads) {
+            // 移除广告内容
+            return false;
+        } else if (item.video) {
+            // 处理视频内容
+            processVideoData(item);
+            return true;
+        } else {
+            // 移除非视频内容（如直播）
+            return !!enabled_live;
         }
+    });
+}
+
+function processShareData(awemeDetail) {
+    if (awemeDetail?.video) {
+        processVideoData(awemeDetail);
     }
-    return aweme_list;
+    return awemeDetail;
 }
 
-function Share(aweme_detail) {
+function processVideoData(videoItem) {
+    if (!videoItem.video || !videoItem.video_control) return;
 
-    if (aweme_detail.video) video_lists(aweme_detail);
-    return aweme_detail;
-}
+    videoItem.prevent_download = false;
+    videoItem.video_control.allow_download = true;
+    videoItem.video_control.prevent_download_type = 0;
 
-function video_lists(lists) {
-    lists.prevent_download = false;
-    //  lists.music.prevent_download = false;
-    // lists.music.is_commerce_music = false ;
-    //
-    // lists.music.is_original_sound = true;
-    //
-    lists.status.reviewed = 1;
-    lists.video_control.allow_download = true;
+    // 替换下载地址为播放地址
+    videoItem.video.download_addr = videoItem.video.play_addr;
+    videoItem.video.download_suffix_logo_addr = videoItem.video.play_addr;
 
-    //lists.video_control.allow_music = true;
+    // 清理无用属性
+    delete videoItem.video.misc_download_addrs;
 
-    lists.video_control.prevent_download_type = 0;
-    delete lists.video.misc_download_addrs;
-    lists.video.download_addr = lists.video.play_addr;
-    lists.video.download_suffix_logo_addr = lists.video.play_addr;
-    lists.aweme_acl.download_general.mute = false;
-    if (lists.aweme_acl.download_general.extra) {
-        delete lists.aweme_acl.download_general.extra;
-        lists.aweme_acl.download_general.code = 0;
-        lists.aweme_acl.download_general.show_type = 2;
-        lists.aweme_acl.download_general.transcode = 3;
-        lists.aweme_acl.download_mask_panel = lists.aweme_acl.download_general;
-        lists.aweme_acl.share_general = lists.aweme_acl.download_general;
+    if (videoItem.aweme_acl?.download_general) {
+        const downloadGeneral = videoItem.aweme_acl.download_general;
+
+        downloadGeneral.mute = false;
+        delete downloadGeneral.extra;
+
+        downloadGeneral.code = 0;
+        downloadGeneral.show_type = 2;
+        downloadGeneral.transcode = 3;
+
+        videoItem.aweme_acl.download_mask_panel = downloadGeneral;
+        videoItem.aweme_acl.share_general = downloadGeneral;
     }
-    return lists;
+    return videoItem;
 }
+
+// 启动主函数
+watermark($response.body);
