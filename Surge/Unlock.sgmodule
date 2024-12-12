@@ -13,8 +13,6 @@ AdGuard=type=http-response,pattern=^https?:\/\/mobile-api\.adguard\.org\/api\/.+
 西窗烛= type=http-response,pattern=https://lchttpapi.xczim.com/*, requires-body=1,max-size=-1,script-path=https://raw.githubusercontent.com/iEwha/Profiles/master/Script/xcz.js
 # > 小影 解锁高级功能
 小影 = type=http-response,pattern=^https:\/\/api-chn\.rthdo\.com\/api\/rest\/u\/vipVerifyReceipt, requires-body=1,max-size=0,script-path= https://raw.githubusercontent.com/iEwha/Profiles/master/Script/vivavideo.js
-# > NiChi 解锁素材
-NiChi= type=http-response,pattern=https?:\/\/m(p|ini-hk)\.bybutter\.com\/mood\/(official-templates|privileges), requires-body=1,max-size=524288,script-path=https://raw.githubusercontent.com/NobyDa/Script/master/Surge/JS/NiChi.js
 # > Spotify 部分解锁premium 
 spotify-json = type=http-request,type=http-request,pattern=^https:\/\/spclient\.wg\.spotify\.com\/(artistview\/v1\/artist|album-entity-view\/v2\/album)\/,requires-body=0,script-path=https://raw.githubusercontent.com/app2smile/rules/master/js/spotify-json.js
 spotify-proto = type=http-response,pattern=^https:\/\/spclient\.wg\.spotify\.com\/(bootstrap\/v1\/bootstrap|user-customization-service\/v1\/customize)$,requires-body=1,binary-body-mode=1,max-size=0,script-path=https://raw.githubusercontent.com/app2smile/rules/master/js/spotify-proto.js,script-update-interval=0
@@ -24,5 +22,5 @@ spotify-proto = type=http-response,pattern=^https:\/\/spclient\.wg\.spotify\.com
 美图秀秀 = type=http-response,pattern=^https?://(api|h5).xiuxiu.meitu.com/(v1/user/show.json|v1/vip/vip_show.json|v1/vip/prompt/query.json|v1/h5/vip/sub_detail.json|v1/h5/user/self_show.json|v1/h5/vip/user_detail.json|v1/vip/prompt/query.json|v1/vip/prompt/query.json), requires-body=1,max-size=0,script-path=https://raw.githubusercontent.com/iEwha/Profiles/master/Script/mtxx.js
 
 [MITM]
-hostname = %APPEND%  lcs-mobile-cops.adobe.io, mb3admin.com, mobile-api.adguard.org, lchttpapi.xczim.com,api-chn.rthdo.com,m*.bybutter.com, spclient.wg.spotify.com,baimiao.uzero.cn,api.xiuxiu.meitu.com, h5.xiuxiu.meitu.com，
+hostname = %APPEND%  lcs-mobile-cops.adobe.io, mb3admin.com, mobile-api.adguard.org, lchttpapi.xczim.com,api-chn.rthdo.com, spclient.wg.spotify.com,baimiao.uzero.cn,api.xiuxiu.meitu.com, h5.xiuxiu.meitu.com，
 
