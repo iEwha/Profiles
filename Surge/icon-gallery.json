@@ -136,6 +136,34 @@
     {
       "name":"ChatGPT_1",
       "url":"https://raw.githubusercontent.com/iEwha/Profiles/master/icon/ChatGPT_1.png"
+    },
+  {
+      "name":"Dler",
+      "url":"https://raw.githubusercontent.com/iEwha/Profiles/master/icon/Dler.png"
+    },
+   {
+      "name":"Maying",
+      "url":"https://raw.githubusercontent.com/iEwha/Profiles/master/icon/Maying.png"
+    },
+   {
+      "name":"NSFW",
+      "url":"https://raw.githubusercontent.com/iEwha/Profiles/master/icon/NSFW.png"
+    },
+   {
+      "name":"Disney",
+      "url":"https://raw.githubusercontent.com/iEwha/Profiles/master/icon/Disney.png"
+    },
+   {
+      "name":"SWCloud",
+      "url":"https://raw.githubusercontent.com/iEwha/Profiles/master/icon/Wallless.png"
+    },
+   {
+      "name":"Ytoo",
+      "url":"https://raw.githubusercontent.com/iEwha/Profiles/master/icon/Ytoo.png"
+    },
+   {
+      "name":"Flower",
+      "url":"https://raw.githubusercontent.com/iEwha/Profiles/master/icon/Flower.png"
     }
   ]
 }
