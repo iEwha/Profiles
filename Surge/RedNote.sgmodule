@@ -1,9 +1,7 @@
 #!name=RedNote
 #!desc=移除图片及视频水印
 [Script]
-
-小红书去水印 = type=http-response, pattern=^https:\/\/(edith|rec|www)\.xiaohongshu\.com\/api\/sns\/(?:v1\/note\/(?:imagefeed|live_photo\/save)|v2\/note\/feed|v3\/note\/videofeed|v4\/note\/videofeed|v10\/note\/video\/save), script-path=https://raw.githubusercontent.com/iEwha/Profiles/refs/heads/master/Script/RedNote.js, requires-body=true
-
+小红书去水印 = type=http-response, pattern=^https:\/\/(edith|rec|www)\.xiaohongshu\.com\/api\/sns\/(?:v1\/note\/(?:imagefeed|live_photo\/save)|v2\/note\/feed|v3\/note\/videofeed|v4\/note\/videofeed|v10\/note\/video\/save), script-path=https://raw.githubusercontent.com/iEwha/Profiles/master/Script/RedNote.js, requires-body=true
 
 [MITM]
 hostname = %APPEND% edith.xiaohongshu.com, rec.xiaohongshu.com, www.xiaohongshu.com
