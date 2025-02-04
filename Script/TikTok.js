@@ -1,87 +1,74 @@
-const watermark = (body) => {
+var watermark = body => {
     try {
-        // 替换 room_id 格式
+        // 修正 room_id 替换问题
         body = body.replace(/\"room_id\":(\d{2,})/g, '"room_id":"$1"');
         let obj = JSON.parse(body);
 
-        if (obj.data) obj.data = processFollowData(obj.data);
-        if (obj.aweme_list) obj.aweme_list = processFeedData(obj.aweme_list);
-        if (obj.aweme_detail) obj.aweme_detail = processShareData(obj.aweme_detail);
-        if (obj.aweme_details) obj.aweme_details = processFeedData(obj.aweme_details);
+        // 处理不同的数据结构
+        if (obj.data) obj.data = processFollow(obj.data);
+        if (obj.aweme_list) obj.aweme_list = processFeed(obj.aweme_list);
+        if (obj.aweme_detail) obj.aweme_detail = processShare(obj.aweme_detail);
+        if (obj.aweme_details) obj.aweme_details = processFeed(obj.aweme_details);
 
         $done({ body: JSON.stringify(obj) });
+
     } catch (err) {
-        console.error("Error occurred:\n", err);
+        console.log("Error:\n" + err);
         $done({});
     }
-};
+}
 
-function processFollowData(data) {
-    if (!Array.isArray(data)) return data;
+watermark($response.body);
 
-    data.forEach((item) => {
-        if (item.aweme?.video) {
-            processVideoData(item.aweme);
-        }
+// 处理关注列表
+function processFollow(data) {
+    data.forEach(item => {
+        if (item.aweme?.video) processVideo(item.aweme);
     });
-
     return data;
 }
 
-function processFeedData(awemeList) {
-    if (!Array.isArray(awemeList)) return awemeList;
-
-    return awemeList.filter((item) => {
-        if (item.is_ads) {
-            // 移除广告内容
-            return false;
-        } else if (item.video) {
-            // 处理视频内容
-            processVideoData(item);
+// 处理推荐/Feed 流
+function processFeed(aweme_list) {
+    return aweme_list.filter(aweme => {
+        if (aweme.is_ads) return false;  // 过滤广告
+        if (aweme.video) {
+            processVideo(aweme);
             return true;
-        } else {
-            // 移除非视频内容（如直播）
-            return !!enabled_live;
         }
+        return typeof enabled_live !== "undefined" && enabled_live;
     });
 }
 
-function processShareData(awemeDetail) {
-    if (awemeDetail?.video) {
-        processVideoData(awemeDetail);
-    }
-    return awemeDetail;
+// 处理单个视频分享页
+function processShare(aweme_detail) {
+    if (aweme_detail.video) processVideo(aweme_detail);
+    return aweme_detail;
 }
 
-function processVideoData(videoItem) {
-    if (!videoItem.video || !videoItem.video_control) return;
+// 处理视频属性，去除水印 & 解锁下载权限
+function processVideo(aweme) {
+    aweme.prevent_download = false;
+    aweme.status.reviewed = 1;
 
-    videoItem.prevent_download = false;
-    videoItem.video_control.allow_download = true;
-    videoItem.video_control.prevent_download_type = 0;
-
-    // 替换下载地址为播放地址
-    videoItem.video.download_addr = videoItem.video.play_addr;
-    videoItem.video.download_suffix_logo_addr = videoItem.video.play_addr;
-
-    // 清理无用属性
-    delete videoItem.video.misc_download_addrs;
-
-    if (videoItem.aweme_acl?.download_general) {
-        const downloadGeneral = videoItem.aweme_acl.download_general;
-
-        downloadGeneral.mute = false;
-        delete downloadGeneral.extra;
-
-        downloadGeneral.code = 0;
-        downloadGeneral.show_type = 2;
-        downloadGeneral.transcode = 3;
-
-        videoItem.aweme_acl.download_mask_panel = downloadGeneral;
-        videoItem.aweme_acl.share_general = downloadGeneral;
+    if (aweme.video_control) {
+        aweme.video_control.allow_download = true;
+        aweme.video_control.prevent_download_type = 0;
     }
-    return videoItem;
-}
 
-// 启动主函数
-watermark($response.body);
+    if (aweme.video) {
+        aweme.video.download_addr = aweme.video.play_addr;
+        aweme.video.download_suffix_logo_addr = aweme.video.play_addr;
+        delete aweme.video.misc_download_addrs;
+    }
+
+    if (aweme.aweme_acl?.download_general) {
+        let acl = aweme.aweme_acl.download_general;
+        acl.mute = false;
+        delete acl.extra;
+        Object.assign(acl, { code: 0, show_type: 2, transcode: 3 });
+
+        aweme.aweme_acl.download_mask_panel = acl;
+        aweme.aweme_acl.share_general = acl;
+    }
+}
