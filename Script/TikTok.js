@@ -1,67 +1,65 @@
-const watermark = (body) => {
+var watermark = body => {
     try {
-        const ENABLE_LIVE = false; // 控制是否保留直播内容
-
-        // 转换 room_id 为字符串
-        body = body.replace(/"room_id"\s*:\s*(\d+)/g, '"room_id":"$1"');
-        const dataObj = JSON.parse(body);
-
-        // 统一处理不同类型的数据
-        const processors = {
-            data: processList,
-            aweme_list: processFeed,
-            aweme_detail: processVideo,
-            aweme_details: processFeed
-        };
-
-        Object.keys(processors).forEach(key => {
-            if (dataObj[key]) dataObj[key] = processors[key](dataObj[key], ENABLE_LIVE);
-        });
-
-        $done({ body: JSON.stringify(dataObj) });
+        body = body.replace(/\"room_id\":(\d{2,})/g, '"room_id":"$1"');
+        let obj = JSON.parse(body);
+        if (obj.data) obj.data = Follow(obj.data);
+        if (obj.aweme_list) obj.aweme_list = Feed(obj.aweme_list);
+        if (obj.aweme_detail) obj.aweme_detail = Share(obj.aweme_detail);
+        if (obj.aweme_details) obj.aweme_details = Feed(obj.aweme_details);
+        $done({ body: JSON.stringify(obj) });
     } catch (err) {
-        console.error(`Watermark Error: ${err.message}`);
+        console.log("Error:\n" + err);
         $done({});
     }
-};
+}
+watermark($response.body);
 
-// 处理列表数据（关注/直播）
-const processList = (list) => list.map(item => {
-    item.aweme?.video && processVideo(item.aweme);
-    return item;
-});
+function Follow(data) {
+    if (data && Array.isArray(data)) {
+        for (let item of data) {
+            if (item.aweme?.video) video_lists(item.aweme);
+        }
+    }
+    return data;
+}
 
-// 处理视频流（主页/推荐）
-const processFeed = (awemeList, keepLive) => 
-    awemeList.filter(item => !item.is_ads && (item.video ? (processVideo(item), true) : keepLive));
+function Feed(aweme_list) {
+    if (aweme_list && Array.isArray(aweme_list)) {
+        for (let i = aweme_list.length - 1; i >= 0; i--) {
+            if (aweme_list[i].is_ads) {
+                aweme_list.splice(i, 1);
+            } else if (aweme_list[i].video) {
+                video_lists(aweme_list[i]);
+            }
+        }
+    }
+    return aweme_list;
+}
 
-// 处理单个视频（详情/分享）
-const processVideo = (aweme) => {
-    if (!aweme?.video) return aweme;
+function Share(aweme_detail) {
+    if (aweme_detail.video) video_lists(aweme_detail);
+    return aweme_detail;
+}
 
-    const { video, video_control, aweme_acl } = aweme;
-
-    // 解除下载限制 & 替换下载地址
-    Object.assign(video_control, { allow_download: true, prevent_download_type: 0 });
-    Object.assign(video, { download_addr: video.play_addr, download_suffix_logo_addr: video.play_addr });
-    delete video.misc_download_addrs;
-
-    // 修改下载权限
-    if (aweme_acl?.download_general) {
-        Object.assign(aweme_acl.download_general, {
-            mute: false,
+function video_lists(lists) {
+    lists.prevent_download = false;
+    lists.status.reviewed = 1;
+    lists.video_control.allow_download = true;
+    lists.video_control.prevent_download_type = 0;
+    delete lists.video.misc_download_addrs;
+    lists.video.download_addr = lists.video.play_addr;
+    lists.video.download_suffix_logo_addr = lists.video.play_addr;
+    lists.aweme_acl.download_general.mute = false;
+    
+    if (lists.aweme_acl.download_general.extra) {
+        delete lists.aweme_acl.download_general.extra;
+        Object.assign(lists.aweme_acl.download_general, {
             code: 0,
             show_type: 2,
             transcode: 3
         });
-        delete aweme_acl.download_general.extra;
-
-        // 统一 ACL 配置
-        aweme_acl.download_mask_panel = aweme_acl.share_general = aweme_acl.download_general;
+        lists.aweme_acl.download_mask_panel = lists.aweme_acl.download_general;
+        lists.aweme_acl.share_general = lists.aweme_acl.download_general;
     }
-
-    return aweme;
-};
-
-// 启动处理流程
-watermark($response.body);
+    return lists;
+}
