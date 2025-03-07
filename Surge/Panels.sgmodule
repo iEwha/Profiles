@@ -1,5 +1,7 @@
 #!name=Panels
 #!desc=信息面板
+#!arguments=NAME:机场名字,URL:编码后的机场订阅,RESET_Day:重置日期,ICON:externaldrive.fill.badge.icloud,COLOR:#FFB6C1
+#!arguments-desc=[参数设置]\n\n⓵ NAME: 可修改成你机场的名字。\n\n⓶ URL: 编码后的机场订阅。\n\n⓷ RESET_DAY: 流量每月重置的日期,如26号就写26,不设置则不显示流量重置日,仅显示到期日期。\n\n⓸ ICON: 自定义面板图标,需为有效的SFSymbolName,如不设置则默认。\n\n⓹ COLOR: 自定义图标颜色,需为颜色的HEX编码,如不设置则默认为"#FFB6C1"。
 
 [Panel]
 #Surge Pro标题,可显示启动时间,点击刷新为重载配置
@@ -10,38 +12,16 @@ net-info-panel=title="网络状态",content="请刷新",style=info,script-name=n
 #节点检测 
 ipcheck = script-name=ipcheck, title="节点信息", content="请刷新", style=info, update-interval=1
 
-#流媒体解锁检测 
-stream-checktool = script-name=stream-check, title="流媒体解锁检测", content="请刷新面板", update-interval=-1
-
-#节假日预览，节日当天早上有提醒
-节假日提醒 = script-name=节假日提醒,update-interval=3600
-
-# Warp
-WARP Panel = script-name=WARP Info,update-interval=1800
+#流量信息
+{{{NAME}}}=script-name={{{NAME}}},update-interval=3600
 
 [Script]
 #Surge Pro标题,可显示启动时间,点击刷新为重载配置
 缓存开关 = type=generic,timeout=10,script-path= https://raw.githubusercontent.com/iEwha/Profiles/master/Surge/Scripts/functionstatus.js,argument=icon=power.circle&color=#FF7500&title=Surge Pro
 
-#网络信息面板
-net-info-panel=script-path=https://raw.githubusercontent.com/iEwha/Profiles/master/Surge/Scripts/net-info-panel.js,type=generic
-
 #节点检测
 ipcheck = type=generic, timeout=3, script-path= https://raw.githubusercontent.com/iEwha/Profiles/master/Surge/Scripts/ipcheck.js
 
-#流媒体解锁检测
-stream-check= type=generic, timeout=15, script-path=https://raw.githubusercontent.com/iEwha/Profiles/master/Surge/Scripts/stream-check.js
-
-#节假日预览
-节假日提醒 = type=generic,timeout=10,script-path=https://raw.githubusercontent.com/iEwha/Profiles/master/Surge/Scripts/timecard.js
-
-# WARP Panel
-WARP Info = type=generic, timeout=15, script-path=https://raw.githubusercontent.com/VirgilClyne/Cloudflare/main/js/Cloudflare.1.1.1.1.panel.js,script-update-interval=0,argument=Title=𝐖𝐀𝐑𝐏
-# Cloudflare for Teams
-WARP Teams Request = type=http-request,pattern=^https?:\/\/(api|zero-trust-client)\.cloudflareclient\.com\/(.*)\/reg\/t\.[0-9a-f]{8}-[0-9a-f]{4}-[0-5][0-9a-f]{3}-[089ab][0-9a-f]{3}-[0-9a-f]{12}$, requires-body=1, script-path=https://raw.githubusercontent.com/VirgilClyne/Cloudflare/main/js/Cloudflare.1.1.1.1.request.js
-WARP Teams Response = type=http-response,pattern=^https?:\/\/(api|zero-trust-client)\.cloudflareclient\.com\/(.*)\/reg\/t\.[0-9a-f]{8}-[0-9a-f]{4}-[0-5][0-9a-f]{3}-[089ab][0-9a-f]{3}-[0-9a-f]{12}$, requires-body=1, script-path=https://raw.githubusercontent.com/VirgilClyne/Cloudflare/main/js/Cloudflare.1.1.1.1.response.js
-
-[MITM]
-hostname = %APPEND% api.cloudflareclient.com, zero-trust-client.cloudflareclient.com
-
+#流量信息
+{{{NAME}}}=type=generic,timeout=10,script-path=https://raw.githubusercontent.com/iEwha/Profiles/refs/heads/master/Surge/Scripts/sub_info.js,script-update-interval=0,argument=url={{{URL}}}&reset_day={{{RESET_Day}}}&title={{{NAME}}}&icon={{{ICON}}}&color={{{COLOR}}}
 
