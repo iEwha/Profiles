@@ -6,9 +6,6 @@
 force-http-engine-hosts = %APPEND% boxjs.net, boxjs.com
 
 [Rule]
-# > 手机百度
-DOMAIN-SUFFIX,ug.baidu.com,REJECT
-URL-REGEX,^https?:\/\/mbd\.baidu\.com\/tcbox,REJECT
 # > Safari 防跳转
 DOMAIN,app-site-association.cdn-apple.com,REJECT
 # > Block iOS Update
@@ -45,4 +42,4 @@ Sub-Store Simple=type=http-request,pattern=^https?:\/\/sub\.store,script-path=ht
 微信公众号 = type=http-response,pattern=^https?:\/\/mp\.weixin\.qq\.com\/mp\/getappmsgad,requires-body=1,max-size=0,script-path=https://raw.githubusercontent.com/iEwha/Profiles/master/Script/WeChat.js,script-update-interval=0
 
 [MITM]
-hostname = %APPEND% www.youtube.com, m.baidu.com,www.baidu.com,mbd.baidu.com, ap?.bilibili.com, ap?.biliapi.net, www.google.cn, boxjs.net, boxjs.com,sub.store,mp.weixin.qq.com,
+hostname = %APPEND% www.youtube.com, ap?.bilibili.com, ap?.biliapi.net, www.google.cn, boxjs.net, boxjs.com,sub.store,mp.weixin.qq.com,
