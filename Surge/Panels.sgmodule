@@ -6,8 +6,6 @@
 [Panel]
 #Surge Pro标题,可显示启动时间,点击刷新为重载配置
 SurgePro_ ReloadProfile = script-name=缓存开关,update-interval=60
-#网络信息面板
-net-info-panel=title="网络状态",content="请刷新",style=info,script-name=net-info-panel
 
 #节点检测 
 ipcheck = script-name=ipcheck, title="节点信息", content="请刷新", style=info, update-interval=1
