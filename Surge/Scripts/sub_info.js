@@ -1,5 +1,6 @@
+let args = getArgs();
+
 (async () => {
-  let args = getArgs();
   let info = await getDataInfo(args.url);
   if (!info) return $done({ title: "流量查询", content: "获取失败", icon: "xmark.circle", "icon-color": "#FF3B30" });
 
@@ -11,7 +12,7 @@
   let content = [`已用：${bytesToSize(used)} / ${bytesToSize(total)}`];
 
   if (resetDayLeft) content.push(`重置：剩余 ${resetDayLeft} 天`);
-  if (expire) content.push(`到期：${formatTime(expire)}`);
+  if (expire && expire !== "false") content.push(`到期：${formatTime(expire)}`);
 
   let now = new Date();
   let timeStr = now.toTimeString().split(" ")[0].slice(0, 5);
@@ -31,9 +32,10 @@ function getArgs() {
 }
 
 function getUserInfo(url) {
+  let method = args.method || "head";
   let request = { headers: { "User-Agent": "Surge" }, url };
   return new Promise((resolve, reject) => {
-    $httpClient.get(request, (err, resp) => {
+    $httpClient[method](request, (err, resp) => {
       if (err) return reject("请求失败");
       if (resp.status !== 200) return reject("状态码错误：" + resp.status);
 
