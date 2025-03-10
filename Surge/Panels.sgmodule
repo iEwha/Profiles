@@ -24,6 +24,6 @@ ipcheck = script-name=ipcheck, title="节点信息", content="请刷新", style=
 ipcheck = type=generic, timeout=3, script-path= https://raw.githubusercontent.com/iEwha/Profiles/master/Surge/Scripts/ipcheck.js
 
 #流量信息
-{{{NAME_1}}}=type=generic,timeout=10,script-path=https://raw.githubusercontent.com/Rabbit-Spec/Surge/Master/Module/Panel/Sub-info/Moore/Sub-info.js,script-update-interval=0,argument=url={{{URL_1}}}&reset_day={{{RESET-Day_1}}}&title={{{NAME_1}}}&icon={{{ICON_1}}}&color={{{COLOR_1}}}
+{{{NAME_1}}}=type=generic,timeout=10,script-path=https://raw.githubusercontent.com/iEwha/Profiles/master/Surge/Scripts/sub_info.js,script-update-interval=0,argument=url={{{URL_1}}}&reset_day={{{RESET-Day_1}}}&title={{{NAME_1}}}&icon={{{ICON_1}}}&color={{{COLOR_1}}}
 
-{{{NAME_2}}}=type=generic,timeout=10,script-path=https://raw.githubusercontent.com/Rabbit-Spec/Surge/Master/Module/Panel/Sub-info/Moore/Sub-info.js,script-update-interval=0,argument=url={{{URL_2}}}&reset_day={{{RESET-Day_2}}}&title={{{NAME_2}}}&icon={{{ICON_2}}}&color={{{COLOR_2}}}
+{{{NAME_2}}}=type=generic,timeout=10,script-path=https://raw.githubusercontent.com/iEwha/Profiles/master/Surge/Scripts/sub_info.js,script-update-interval=0,argument=url={{{URL_2}}}&reset_day={{{RESET-Day_2}}}&title={{{NAME_2}}}&icon={{{ICON_2}}}&color={{{COLOR_2}}}

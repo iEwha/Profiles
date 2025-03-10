@@ -1,144 +1,118 @@
-/*
-Surge配置参考注释，感谢@asukanana,感谢@congcong.
+async function main() {
+  const args = getArgs();
+  const info = await getDataInfo(args.url);
+  
+  if (!info) {
+    $done({
+      title: "流量信息获取失败",
+      content: "请检查订阅链接或网络连接",
+      icon: "exclamationmark.triangle",
+      "icon-color": "#ffcc00"
+    });
+    return;
+  }
 
-示例↓↓↓ 
-----------------------------------------
+  const resetDayLeft = getRemainingDays(parseInt(args["reset_day"]));
+  const used = info.download + info.upload;
+  const total = info.total;
+  const expire = args.expire || info.expire;
+  const content = [
+    `用量：${bytesToSize(used)} / ${bytesToSize(total)}`,
+    `剩余：${bytesToSize(total - used)}`
+  ];
 
-[Script]
-Sub_info = type=generic,timeout=10,script-path=https://raw.githubusercontent.com/mieqq/mieqq/master/sub_info_panel.js,script-update-interval=0,argument=url=[URL encode 后的机场节点链接]&reset_day=1&title=AmyInfo&icon=bonjour&color=#007aff
-
-[Panel]
-Sub_info = script-name=Sub_info,update-interval=600
-
-----------------------------------------
-
-先将带有流量信息的节点订阅链接encode，用encode后的链接替换"url="后面的[机场节点链接]
-
-可选参数 &reset_day，后面的数字替换成流量每月重置的日期，如1号就写1，8号就写8。如"&reset_day=8",不加该参数不显示流量重置信息。
-
-可选参数 &expire，机场链接不带expire信息的，可以手动传入expire参数，如"&expire=2022-02-01",注意一定要按照yyyy-MM-dd的格式。
-
-可选参数"title=xxx" 可以自定义标题。
-
-可选参数"icon=xxx" 可以自定义图标，内容为任意有效的 SF Symbol Name，如 bolt.horizontal.circle.fill，详细可以下载app https://apps.apple.com/cn/app/sf-symbols-browser/id1491161336
-
-可选参数"color=xxx" 当使用 icon 字段时，可传入 color 字段控制图标颜色，字段内容为颜色的 HEX 编码。如：color=#007aff
-----------------------------------------
-*/
-
-(async () => {
-  let args = getArgs();
-  let info = await getDataInfo(args.url);
-  if (!info) $done();
-  let resetDayLeft = getRmainingDays(parseInt(args["reset_day"]));
-
-  let used = info.download + info.upload;
-  let total = info.total;
-  let expire = args.expire || info.expire;
-  let content = [`用量：${bytesToSize(used)} | ${bytesToSize(total)}`];
-
-  if (resetDayLeft) {
-    content.push(`重置：剩余${resetDayLeft}天`);
+  if (resetDayLeft !== null) {
+    content.push(`重置：${resetDayLeft}天后`);
   }
   if (expire) {
-    if (/^[\d.]+$/.test(expire)) expire *= 1000;
-    content.push(`到期：${formatTime(expire)}`);
+    const expireTime = /^[\d.]+$/.test(expire) ? expire * 1000 : expire;
+    content.push(`到期：${formatTime(expireTime)}`);
   }
 
-  let now = new Date();
-  let hour = now.getHours();
-  let minutes = now.getMinutes();
-  hour = hour > 9 ? hour : "0" + hour;
-  minutes = minutes > 9 ? minutes : "0" + minutes;
-
   $done({
-    title: `${args.title} | ${hour}:${minutes}`,
+    title: `${args.title} | ${getTimeString()}`,
     content: content.join("\n"),
-    icon: args.icon || "airplane.circle",
-    "icon-color": args.color || "#007aff",
+    icon: args.icon || "chart.bar",
+    "icon-color": args.color || "#007aff"
   });
-})();
+}
 
 function getArgs() {
   return Object.fromEntries(
     $argument
       .split("&")
-      .map((item) => item.split("="))
+      .map(item => item.split("="))
       .map(([k, v]) => [k, decodeURIComponent(v)])
-  );
-}
-
-function getUserInfo(url) {
-  let request = { headers: { "User-Agent": "Quantumult%20X" }, url };
-  return new Promise((resolve, reject) =>
-    $httpClient.get(request, (err, resp) => {
-      if (err != null) {
-        reject(err);
-        return;
-      }
-      if (resp.status !== 200) {
-        reject(resp.status);
-        return;
-      }
-      let header = Object.keys(resp.headers).find(
-        (key) => key.toLowerCase() === "subscription-userinfo"
-      );
-      if (header) {
-        resolve(resp.headers[header]);
-        return;
-      }
-      reject("链接响应头不带有流量信息");
-    })
-  );
 }
 
 async function getDataInfo(url) {
-  const [err, data] = await getUserInfo(url)
-    .then((data) => [null, data])
-    .catch((err) => [err, null]);
-  if (err) {
-    console.log(err);
-    return;
+  try {
+    const { headers } = await httpGet(url);
+    const subInfo = headers["subscription-userinfo"];
+    
+    return Object.fromEntries(
+      subInfo.match(/(\w+)=([\d.eE+]+)/g)
+          .map(item => item.split("="))
+          .map(([k, v]) => [k.toLowerCase(), Number(v)])
+    );
+  } catch (error) {
+    console.log(`流量信息获取失败: ${error}`);
+    return null;
   }
-
-  return Object.fromEntries(
-    data
-      .match(/\w+=[\d.eE+]+/g)
-      .map((item) => item.split("="))
-      .map(([k, v]) => [k, Number(v)])
-  );
 }
 
-function getRmainingDays(resetDay) {
-  if (!resetDay) return;
+function httpGet(url) {
+  return new Promise((resolve, reject) => {
+    $httpClient.get({
+      url: url,
+      headers: { "User-Agent": "Surge" }
+    }, (error, response) => {
+      error ? reject(error) : resolve(response);
+    });
+  });
+}
 
-  let now = new Date();
-  let today = now.getDate();
-  let month = now.getMonth();
-  let year = now.getFullYear();
-  let daysInMonth;
-
-  if (resetDay > today) {
-    daysInMonth = 0;
-  } else {
-    daysInMonth = new Date(year, month + 1, 0).getDate();
-  }
-
-  return daysInMonth - today + resetDay;
+function getRemainingDays(resetDay) {
+  if (!resetDay || resetDay < 1 || resetDay > 31) return null;
+  
+  const today = new Date();
+  const targetDate = new Date(today);
+  targetDate.setDate(resetDay);
+  targetDate.setHours(0, 0, 0, 0);
+  
+  if (targetDate < today) targetDate.setMonth(targetDate.getMonth() + 1);
+  
+  return Math.ceil((targetDate - today) / 86400000);
 }
 
 function bytesToSize(bytes) {
-  if (bytes === 0) return "0B";
-  let k = 1024;
-  sizes = ["B", "KB", "MB", "GB", "TB", "PB", "EB", "ZB", "YB"];
-  let i = Math.floor(Math.log(bytes) / Math.log(k));
-  return (bytes / Math.pow(k, i)).toFixed(2) + " " + sizes[i];
+  if (isNaN(bytes) || bytes < 0) return "0B";
+  const units = ["B", "KB", "MB", "GB", "TB"];
+  let i = 0;
+  while (bytes >= 1024 && i < units.length - 1) {
+    bytes /= 1024;
+    i++;
+  }
+  return `${bytes.toFixed(2)} ${units[i]}`;
 }
 
-function formatTime(time) {
-  let dateObj = new Date(time);
-  let year = dateObj.getFullYear();
-  let month = dateObj.getMonth() + 1;
-  let day = dateObj.getDate();
-  return year + "年" + month + "月" + day + "日";
+function getTimeString() {
+  return new Date().toLocaleTimeString("zh-CN", {
+    hour12: false,
+    hour: "2-digit",
+    minute: "2-digit"
+  });
 }
+
+function formatTime(timestamp) {
+  try {
+    return new Date(timestamp).toLocaleDateString("zh-CN", {
+      month: "2-digit",
+      day: "2-digit"
+    });
+  } catch {
+    return "未知时间";
+  }
+}
+
+main();
