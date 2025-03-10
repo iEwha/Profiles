@@ -1,118 +1,79 @@
-async function main() {
-  const args = getArgs();
-  const info = await getDataInfo(args.url);
+(async () => {
+  let args = getArgs();
+  let info = await getDataInfo(args.url);
+  if (!info) return $done({ title: "流量查询", content: "获取失败", icon: "xmark.circle", "icon-color": "#FF3B30" });
+
+  let used = info.download + info.upload;
+  let total = info.total;
+  let resetDayLeft = getRemainingDays(parseInt(args["reset_day"]));
+  let expire = args.expire || info.expire;
   
-  if (!info) {
-    $done({
-      title: "流量信息获取失败",
-      content: "请检查订阅链接或网络连接",
-      icon: "exclamationmark.triangle",
-      "icon-color": "#ffcc00"
-    });
-    return;
-  }
+  let content = [`已用：${bytesToSize(used)} / ${bytesToSize(total)}`];
 
-  const resetDayLeft = getRemainingDays(parseInt(args["reset_day"]));
-  const used = info.download + info.upload;
-  const total = info.total;
-  const expire = args.expire || info.expire;
-  const content = [
-    `用量：${bytesToSize(used)} / ${bytesToSize(total)}`,
-    `剩余：${bytesToSize(total - used)}`
-  ];
+  if (resetDayLeft) content.push(`重置：剩余 ${resetDayLeft} 天`);
+  if (expire) content.push(`到期：${formatTime(expire)}`);
 
-  if (resetDayLeft !== null) {
-    content.push(`重置：${resetDayLeft}天后`);
-  }
-  if (expire) {
-    const expireTime = /^[\d.]+$/.test(expire) ? expire * 1000 : expire;
-    content.push(`到期：${formatTime(expireTime)}`);
-  }
+  let now = new Date();
+  let timeStr = now.toTimeString().split(" ")[0].slice(0, 5);
 
   $done({
-    title: `${args.title} | ${getTimeString()}`,
+    title: `${args.title || "流量监控"} | ${timeStr}`,
     content: content.join("\n"),
-    icon: args.icon || "chart.bar",
-    "icon-color": args.color || "#007aff"
+    icon: args.icon || "network",
+    "icon-color": args.color || "#007AFF",
   });
-}
+})();
 
 function getArgs() {
   return Object.fromEntries(
-    $argument
-      .split("&")
-      .map(item => item.split("="))
-      .map(([k, v]) => [k, decodeURIComponent(v)])
+    ($argument || "").split("&").map((item) => item.split("=")).map(([k, v]) => [k, decodeURIComponent(v)])
+  );
+}
+
+function getUserInfo(url) {
+  let request = { headers: { "User-Agent": "Surge" }, url };
+  return new Promise((resolve, reject) => {
+    $httpClient.get(request, (err, resp) => {
+      if (err) return reject("请求失败");
+      if (resp.status !== 200) return reject("状态码错误：" + resp.status);
+
+      let header = Object.keys(resp.headers).find((key) => key.toLowerCase() === "subscription-userinfo");
+      header ? resolve(resp.headers[header]) : reject("响应无流量信息");
+    });
+  });
 }
 
 async function getDataInfo(url) {
   try {
-    const { headers } = await httpGet(url);
-    const subInfo = headers["subscription-userinfo"];
-    
+    let data = await getUserInfo(url);
     return Object.fromEntries(
-      subInfo.match(/(\w+)=([\d.eE+]+)/g)
-          .map(item => item.split("="))
-          .map(([k, v]) => [k.toLowerCase(), Number(v)])
+      data.match(/\w+=[\d.eE+]+/g).map((item) => item.split("=")).map(([k, v]) => [k, Number(v)])
     );
-  } catch (error) {
-    console.log(`流量信息获取失败: ${error}`);
+  } catch (err) {
+    console.log(err);
     return null;
   }
 }
 
-function httpGet(url) {
-  return new Promise((resolve, reject) => {
-    $httpClient.get({
-      url: url,
-      headers: { "User-Agent": "Surge" }
-    }, (error, response) => {
-      error ? reject(error) : resolve(response);
-    });
-  });
-}
-
 function getRemainingDays(resetDay) {
-  if (!resetDay || resetDay < 1 || resetDay > 31) return null;
+  if (!resetDay) return null;
   
-  const today = new Date();
-  const targetDate = new Date(today);
-  targetDate.setDate(resetDay);
-  targetDate.setHours(0, 0, 0, 0);
-  
-  if (targetDate < today) targetDate.setMonth(targetDate.getMonth() + 1);
-  
-  return Math.ceil((targetDate - today) / 86400000);
+  let now = new Date();
+  let today = now.getDate();
+  let daysInMonth = new Date(now.getFullYear(), now.getMonth() + 1, 0).getDate();
+
+  return resetDay > today ? resetDay - today : daysInMonth - today + resetDay;
 }
 
 function bytesToSize(bytes) {
-  if (isNaN(bytes) || bytes < 0) return "0B";
-  const units = ["B", "KB", "MB", "GB", "TB"];
-  let i = 0;
-  while (bytes >= 1024 && i < units.length - 1) {
-    bytes /= 1024;
-    i++;
-  }
-  return `${bytes.toFixed(2)} ${units[i]}`;
+  if (bytes === 0) return "0B";
+  let k = 1024;
+  let sizes = ["B", "KB", "MB", "GB", "TB"];
+  let i = Math.floor(Math.log(bytes) / Math.log(k));
+  return (bytes / Math.pow(k, i)).toFixed(2) + " " + sizes[i];
 }
 
-function getTimeString() {
-  return new Date().toLocaleTimeString("zh-CN", {
-    hour12: false,
-    hour: "2-digit",
-    minute: "2-digit"
-  });
+function formatTime(time) {
+  let dateObj = new Date(time * 1000);
+  return `${dateObj.getFullYear()}年${dateObj.getMonth() + 1}月${dateObj.getDate()}日`;
 }
-
-function formatTime(timestamp) {
-  try {
-    return new Date(timestamp).toLocaleDateString("zh-CN", {
-      month: "2-digit",
-      day: "2-digit"
-    });
-  } catch {
-    return "未知时间";
-  }
-}
-
-main();
