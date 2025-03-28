@@ -1,6 +1,6 @@
 #!name=RedNote
 #!desc=移除图片及视频水印
-https://raw.githubusercontent.com/iEwha/Profiles/master/Script/RedNote.js
+
 [Rule]
 AND,((PROTOCOL,QUIC),(DOMAIN-SUFFIX,xiaohongshu.com)),REJECT
 
