@@ -73,14 +73,14 @@ function handleNoteFeed(obj) {
     });
     const imagesList = obj.data[0].note_list[0].images_list;
     obj.data[0].note_list[0].images_list = enhanceImages(imagesList);
-    $.setdata(JSON.stringify(imagesList), 'private.xiaohongshu.feed.rsp');
+    $.setdata(JSON.stringify(imagesList), 'agent.xiaohongshu.feed.rsp');
     console.log('Stored watermark-free info ♻️');
   }
 }
 
 // 处理 Live Photo 保存
 function handleLivePhotoSave(obj) {
-  const cachedRsp = $.getdata('private.xiaohongshu.feed.rsp');
+  const cachedRsp = $.getdata('agent.xiaohongshu.feed.rsp');
   if (!cachedRsp) {
     console.log('Cache empty, returning original body');
     return $done({ body: $response.body });
@@ -152,7 +152,7 @@ function handleVideoSave(obj) {
 
 // 处理评论区
 function handleComments(obj) {
-  replaceRedIdWithPrivate(obj.data);
+  replaceRedIdWithAgent(obj.data);
   let livePhotos = [];
   let noteId = '';
   if (obj.data?.comments?.length > 0) {
@@ -166,7 +166,7 @@ function handleComments(obj) {
 
 // 处理评论视频下载
 function handleCommentVideoDownload(obj) {
-  const commitsCache = $.getdata('private.xiaohongshu.comments.rsp');
+  const commitsCache = $.getdata('agent.xiaohongshu.comments.rsp');
   if (commitsCache && obj.data?.video) {
     const commitsRsp = JSON.parse(commitsCache);
     const match = commitsRsp.livePhotos.find(item => item.videId === obj.data.video.video_id);
@@ -194,7 +194,7 @@ function addDownloadEntry(item) {
 }
 
 function enhanceImages(imagesList) {
-  const imageQuality = $.getdata('private.xiaohongshu.imageQuality') || 'high';
+  const imageQuality = $.getdata('agent.xiaohongshu.imageQuality') || 'high';
   let jsonStr = JSON.stringify(imagesList);
   if (imageQuality === 'original') {
     jsonStr = jsonStr.replace(/\?imageView2\/2[^&]*(?:&redImage\/frame\/0)/, '?imageView2/0/format/png&redImage/frame/0');
@@ -211,19 +211,19 @@ function replaceUrlContent(collectionA, collectionB) {
     const match = collectionB.find(itemB => itemB.file_id === itemA.file_id);
     if (match) {
       itemA.url = match.url;
-      itemA.author = '@private';
+      itemA.author = '@Agent';
     }
   });
 }
 
-function replaceRedIdWithPrivate(obj) {
-  if (Array.isArray(obj)) return obj.forEach(item => replaceRedIdWithPrivate(item));
+function replaceRedIdWithAgent(obj) {
+  if (Array.isArray(obj)) return obj.forEach(item => replaceRedIdWithAgent(item));
   if (obj && typeof obj === 'object') {
     if ('red_id' in obj) {
-      obj.private = obj.red_id;
+      obj.agent = obj.red_id;
       delete obj.red_id;
     }
-    Object.values(obj).forEach(value => replaceRedIdWithPrivate(value));
+    Object.values(obj).forEach(value => replaceRedIdWithAgent(value));
   }
 }
 
@@ -245,12 +245,12 @@ function processComment(comment, livePhotos) {
 }
 
 function updateCommentCache(noteId, livePhotos) {
-  const cached = $.getdata('private.xiaohongshu.comments.rsp');
+  const cached = $.getdata('agent.xiaohongshu.comments.rsp');
   let commitsRsp = cached ? JSON.parse(cached) : { noteId: '', livePhotos: [] };
   commitsRsp = commitsRsp.noteId === noteId
     ? { noteId, livePhotos: deduplicateLivePhotos([...commitsRsp.livePhotos, ...livePhotos]) }
     : { noteId, livePhotos };
-  $.setdata(JSON.stringify(commitsRsp), 'private.xiaohongshu.comments.rsp');
+  $.setdata(JSON.stringify(commitsRsp), 'agent.xiaohongshu.comments.rsp');
 }
 
 function deduplicateLivePhotos(livePhotos) {
