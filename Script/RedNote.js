@@ -211,7 +211,6 @@ function replaceUrlContent(collectionA, collectionB) {
     const match = collectionB.find(itemB => itemB.file_id === itemA.file_id);
     if (match) {
       itemA.url = match.url;
-      itemA.author = '@Agent';
     }
   });
 }
