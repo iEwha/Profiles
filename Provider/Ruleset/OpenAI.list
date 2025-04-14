@@ -1,15 +1,17 @@
 # OpenAI
 # > ChatGPT
+DOMAIN-SUFFIX,chat.com
 DOMAIN-SUFFIX,chatgpt.com
+DOMAIN-SUFFIX,livekit.cloud
 DOMAIN-SUFFIX,oaistatic.com
 DOMAIN-SUFFIX,oaiusercontent.com
 DOMAIN-SUFFIX,openai.com
+DOMAIN-SUFFIX,sora.com
 DOMAIN,api.statsig.com
 DOMAIN,api-iam.intercom.io
-DOMAIN,chatgpt.livekit.cloud
 DOMAIN,o33249.ingest.sentry.io
 DOMAIN,openaiapi-site.azureedge.net
-DOMAIN,sfo3.turn.livekit.cloud
+DOMAIN-KEYWORD,openaiapi
 DOMAIN-KEYWORD,openaicom
 
 # Anthropic
@@ -38,3 +40,7 @@ DOMAIN,www.bing.com
 
 # Meta
 DOMAIN,imagine.meta.com
+
+# xAI
+DOMAIN-SUFFIX,grok.com
+DOMAIN-SUFFIX,x.ai
