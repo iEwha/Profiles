@@ -297,16 +297,20 @@ payload:
   - DOMAIN-SUFFIX,skyking.com.tw
   - DOMAIN,hamifans.emome.net
   # > TikTok
-  - PROCESS-NAME,com.ss.android.ugc.trill
+  - DOMAIN,p16-tiktokcdn-com.akamaized.net
   - DOMAIN-SUFFIX,byteoversea.com
   - DOMAIN-SUFFIX,ibytedtos.com
+  - DOMAIN-SUFFIX,ibyteimg.com
+  - DOMAIN-SUFFIX,ipstatp.com
   - DOMAIN-SUFFIX,muscdn.com
   - DOMAIN-SUFFIX,musical.ly
-  - DOMAIN-SUFFIX,tiktok.com
+  - DOMAIN-SUFFIX,sgpstatp.com
+  - DOMAIN-SUFFIX,snssdk.com
   - DOMAIN-SUFFIX,tik-tokapi.com
+  - DOMAIN-SUFFIX,tiktok.com
   - DOMAIN-SUFFIX,tiktokcdn.com
   - DOMAIN-SUFFIX,tiktokv.com
-  - DOMAIN-KEYWORD,tiktokcdn-
+  - DOMAIN-KEYWORD,-tiktokcdn-com
   # > TVer
   - PROCESS-NAME,jp.hamitv.hamiand1
   - DOMAIN-SUFFIX,tver.jp
