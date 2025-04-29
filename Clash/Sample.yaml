@@ -187,13 +187,6 @@ proxy-groups:
       - US
 
 rule-providers:
-   Reject:
-    type: http
-    behavior: classical
-    path: ./Ruleset/iEwha/Reject.yaml
-    url: https://cdn.jsdelivr.net/gh/iEwha/Profiles@master/Provider/Ruleset/Reject.yaml
-    interval: 86400
-
    Apple:
     type: http
     behavior: classical
@@ -281,7 +274,6 @@ rule-providers:
 
 # 规则模式
 rules:
-  - RULE-SET,Reject,REJECT
   - RULE-SET,Apple,DIRECT
   - RULE-SET,Emby,Emby
   - RULE-SET,Meta,Meta
@@ -301,7 +293,6 @@ script:
   code: |
     def main(ctx, metadata):
         ruleset_action = {    
-            "Reject": "REJECT", 
             "Apple": "DIRECT",
             "Emby": "Emby",
             "Meta": "Meta",
