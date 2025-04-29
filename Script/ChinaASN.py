@@ -1,16 +1,11 @@
-'''
-Author: Vincent Young
-Copyright © 2022 by Vincent, All Rights Reserved. 
-'''
 import requests
 from lxml import etree
 import time
 
 def initFile():
-    with open("Provider/Ruleset/ASN.China.list", "w") as asnFile:
+    with open("Provider/Ruleset/ChinaASN.list", "w") as asnFile:
         asnFile.write("// ASN Information in China \n")
-
-
+        
 def saveLatestASN():
     url = "https://bgp.he.net/country/CN"
     headers = {
@@ -25,7 +20,7 @@ def saveLatestASN():
         asnName = asn.xpath('td[2]')[0].text
         if asnName != None:
             asnInfo = "IP-ASN,{} // {}".format(asnNumber, asnName)
-            with open("Provider/Ruleset/ASN.China.list", "a") as asnFile:
+            with open("Provider/Ruleset/ChinaASN.list", "a") as asnFile:
                 asnFile.write(asnInfo)
                 asnFile.write("\n")
 
