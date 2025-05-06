@@ -1,4 +1,4 @@
-name: Update GeoIPs
+name: Update GeoIP
 
 on:
   workflow_dispatch:
@@ -20,8 +20,6 @@ jobs:
         curl -O https://raw.githubusercontent.com/Loyalsoldier/geoip/release/Country-only-cn-private.mmdb
         curl -O https://raw.githubusercontent.com/Loyalsoldier/geoip/release/Country-without-asn.mmdb
         curl -O https://raw.githubusercontent.com/Loyalsoldier/geoip/release/Country-asn.mmdb
-        curl -O https://raw.githubusercontent.com/Loyalsoldier/geoip/release/geoip.dat
-        curl -O https://raw.githubusercontent.com/Loyalsoldier/geoip/release/geoip-only-cn-private.dat
 
     - name: commit
       run: | 
