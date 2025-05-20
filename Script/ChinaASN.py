@@ -32,8 +32,8 @@ def saveLatestASN():
             with open("Provider/Ruleset/ChinaASN.list", "a") as asnFile:
                 asnFile.write(asnInfo + "\n")
             
-            # Write to Clash format file
-            clashRule = "  - IP-ASN,{}".format(asnNumber)
+            # Write to Clash format file with comment
+            clashRule = "  - IP-ASN,{} // {}".format(asnNumber, asnName)
             with open("Provider/Ruleset/ChinaASN.yaml", "a") as clashFile:
                 clashFile.write(clashRule + "\n")
 
