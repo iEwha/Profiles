@@ -7,7 +7,7 @@ def initFile():
         asnFile.write("// ASN Information in China \n")
 
 def initClashFile():
-    with open("Provider/Ruleset/ChinaASN_clash.yaml", "w") as clashFile:
+    with open("Provider/Ruleset/ChinaASN.yaml", "w") as clashFile:
         clashFile.write("# Clash Ruleset for China ASNs\n")
         clashFile.write("payload:\n")
 
