@@ -11,9 +11,7 @@
 * *QuantumultX*
     ``` bash
     https://raw.githubusercontent.com/iEwha/Profiles/master/QuantumultX/QuantumultX.conf
-* *Loon*
-    ``` bash
-    https://raw.githubusercontent.com/iEwha/Profiles/master/Loon/Loon.conf
+
 
 ## 部分模块和复写：
 
@@ -57,22 +55,6 @@
    https://raw.githubusercontent.com/iEwha/Profiles/master/QuantumultX/Rewrite/others.conf
 </details>
 
-<details> 
-<summary>Loon插件</summary>
-
-* 抖音净化
-   ``` bash
-   https://raw.githubusercontent.com/iEwha/Profiles/master/Loon/ByteDance.plugin
-* TikTok解锁 
-   ``` bash
-   https://raw.githubusercontent.com/iEwha/Profiles/master/Loon/TikTok.plugin
-* 功能解锁 
-   ``` bash
-   https://raw.githubusercontent.com/iEwha/Profiles/master/Loon/Unlock.plugin 
-* 其他 
-   ``` bash
-   https://raw.githubusercontent.com/iEwha/Profiles/master/Loon/Script.plugin 
-</details>
 
 ## 感谢:
 
