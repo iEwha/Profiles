@@ -1,6 +1,6 @@
 import requests
 
-url = "https://raw.githubusercontent.com/cbuijs/ipasn/master/country-asia-china4.list"
+url = "https://raw.githubusercontent.com/17mon/china_ip_list/master/china_ip_list.txt"
 
 resp = requests.get(url)
 resp.raise_for_status()   
