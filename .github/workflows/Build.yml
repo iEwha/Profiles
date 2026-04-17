@@ -1,7 +1,4 @@
 name: Update ASN&IP
-
-permissions:
-  contents: write
 on: 
   workflow_dispatch:
   schedule:
@@ -35,5 +32,4 @@ jobs:
       - name: Push changes
         uses: ad-m/github-push-action@master
         with:
-          github_token: ${{ secrets.GIT_TOKEN }}
-          branch: ${{ github.ref_name }}  
+         github_token: ${{ secrets.GIT_TOKEN }}
