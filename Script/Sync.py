@@ -4,8 +4,8 @@ import requests
 from collections import Counter
 
 URLS = [
-    "https://raw.githubusercontent.com/dler-io/Rules/refs/heads/main/Surge/Surge%203/Provider/Proxy.list",
-    "https://raw.githubusercontent.com/ConnersHua/RuleGo/refs/heads/master/Surge/Ruleset/Proxy.list"
+    "https://raw.githubusercontent.com/dler-io/Rules/main/Surge/Surge%203/Provider/Proxy.list",
+    "https://raw.githubusercontent.com/ConnersHua/RuleGo/master/Surge/Ruleset/Proxy.list"
 ]
 
 SURGE_OUTPUT = "Provider/Ruleset/Proxy.list"
