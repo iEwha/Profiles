@@ -1,8 +1,8 @@
 # NAME: Proxy
-# TOTAL: 1379
+# TOTAL: 1380
 # DOMAIN: 58
 # DOMAIN-KEYWORD: 4
-# DOMAIN-SUFFIX: 1237
+# DOMAIN-SUFFIX: 1238
 # IP-CIDR: 72
 # IP-CIDR6: 5
 # USER-AGENT: 3
@@ -125,7 +125,6 @@ DOMAIN-SUFFIX,apk-dl.com
 DOMAIN-SUFFIX,apkmirror.com
 DOMAIN-SUFFIX,apkpure.com
 DOMAIN-SUFFIX,appdownloader.net
-DOMAIN-SUFFIX,apple-dns.net
 DOMAIN-SUFFIX,apple.news
 DOMAIN-SUFFIX,appledaily.com
 DOMAIN-SUFFIX,appledaily.com.hk
@@ -1225,6 +1224,7 @@ DOMAIN-SUFFIX,wheel-size.cn
 DOMAIN-SUFFIX,whoer.net
 DOMAIN-SUFFIX,wikibooks.org
 DOMAIN-SUFFIX,wikidata.org
+DOMAIN-SUFFIX,wikifunctions.org
 DOMAIN-SUFFIX,wikileaks-forum.com
 DOMAIN-SUFFIX,wikileaks.info
 DOMAIN-SUFFIX,wikileaks.org
@@ -1236,6 +1236,7 @@ DOMAIN-SUFFIX,wikipedia.com
 DOMAIN-SUFFIX,wikipedia.org
 DOMAIN-SUFFIX,wikiquote.org
 DOMAIN-SUFFIX,wikisource.org
+DOMAIN-SUFFIX,wikispecies.org
 DOMAIN-SUFFIX,wikiversity.org
 DOMAIN-SUFFIX,wikivoyage.org
 DOMAIN-SUFFIX,wikiwand.com
