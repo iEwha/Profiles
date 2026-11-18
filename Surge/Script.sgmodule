@@ -1,5 +1,6 @@
 #!name=Scripts
-#!desc= 屏蔽HTTP3/QUIC协议、Bilbii换区,评分、微信公众号广告
+#!desc= 屏蔽HTTP3/QUIC协议、
+微信公众号广告
 #!system=ios
 
 [General]
@@ -36,14 +37,9 @@ https:\/\/www.youtube.com\/api\/timedtext\?.+&lang=(?!(zh|zh\-Hans)&)((?!&tlang=
 ^https:\/\/mp\.weixin\.qq\.com\/mp\/relatedsearchword data-type=text data="{}" status-code=200
 ^http:\/\/\w+\.wxs\.qq\.com\/\d+\/\d+\/(snscosdownload|snssvpdownload)\/(SH|SZ)\/reserved\/\w+ data-type=text data="{}" status-code=200
 
-
 [Script]
-# > bilbii换区,评分
-换区 = type=http-response,pattern=^https:\/\/ap(p|i)\.bili(bili|api)\.(com|net)\/(pgc\/view\/v\d\/app\/season|x\/offline\/version)\?,requires-body=1,max-size=0,script-path=https://raw.githubusercontent.com/NobyDa/Script/master/Surge/JS/Bili_Auto_Regions.js
-搜索 = type=http-request,pattern=^https:\/\/ap(p|i)\.bili(bili|api)\.(com|net)\/x\/v\d\/search(\/type)?\?.+?%20(%E6%B8%AF|%E5%8F%B0|%E4%B8%AD)&,script-path=https://raw.githubusercontent.com/NobyDa/Script/master/Surge/JS/Bili_Auto_Regions.js
-
 # > Boxjs 
 boxjs = type=http-request,pattern=https?:\/\/boxjs\.(com|net),script-path=https://raw.githubusercontent.com/chavyleung/scripts/master/box/chavy.boxjs.js, requires-body=true, timeout=120
 
 [MITM]
-hostname = %APPEND% www.youtube.com, ap?.bilibili.com, ap?.biliapi.net, www.google.cn, boxjs.net, boxjs.com,mp.weixin.qq.com,m.baidu.com,www.baidu.com
+hostname = %APPEND% www.youtube.com,www.google.cn, boxjs.net, boxjs.com,mp.weixin.qq.com,m.baidu.com,www.baidu.com
