@@ -1,6 +1,5 @@
 #!name=Scripts
-#!desc= 屏蔽HTTP3/QUIC协议、
-微信公众号广告
+#!desc= 屏蔽HTTP3/QUIC协议、微信公众号广告
 #!system=ios
 
 [General]
