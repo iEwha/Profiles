@@ -1,13 +1,18 @@
 # > Bilibili
-DOMAIN,api.biliapi.com
-DOMAIN,api.biliapi.net
-DOMAIN,api.bilibili.com
-DOMAIN,app.biliapi.com
-DOMAIN,app.biliapi.net
-DOMAIN,app.bilibili.com
-DOMAIN,grpc.biliapi.net
-DOMAIN,m.bilibili.com
+USER-AGENT,*bili*
+DOMAIN-SUFFIX,bilibili.com
+DOMAIN-SUFFIX,bilibili.tv
+DOMAIN-SUFFIX,biliapi.net
+DOMAIN-SUFFIX,biliapi.com
+DOMAIN-SUFFIX,bilivideo.com
+DOMAIN-SUFFIX,acgvideo.com
+DOMAIN-SUFFIX,acg.tv
+DOMAIN-SUFFIX,b23.tv
+DOMAIN-SUFFIX,hdslb.com
 DOMAIN,upos-hz-mirrorakam.akamaized.net
-DOMAIN,www.bilibili.com
+DOMAIN-KEYWORD,bilibili
 DOMAIN-KEYWORD,cn-hk-eq-bcache-
 IP-CIDR,121.11.192.0/24,no-resolve
+// 港台版 Bilibili App
+USER-AGENT,bili-inter*
+DOMAIN,apiintl.biliapi.net
